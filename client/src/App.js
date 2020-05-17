@@ -1,14 +1,26 @@
 import React from 'react';
-import './App.css';
+import { Route } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to the fanfic mainpage!</h1>
-      </header>
-    </div>
-  );
+import Home from './pages/Home'
+import Fanfic from './pages/Fanfic'
+import Forum from './pages/Forum'
+import Gallery from './pages/Gallery'
+import Admin from './pages/Admin'
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <BrowserRouter>
+          <Route exact path={"/"} component={Home} />
+          <Route path={"/fanfic"} component={Fanfic} />
+          <Route path={"/forum"} component={Forum} />
+          <Route path={"/gallery"} component={Gallery} />
+          <Route path={"/admin"} component={Admin} />
+        </BrowserRouter>
+      </React.Fragment>
+    )
+  }
 }
 
-export default App;

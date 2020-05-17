@@ -3,12 +3,12 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Content from '../components/Content'
 
-export default class Gallery extends React.Component {
+export default class Home extends React.Component {
     render() {
         return (
             <div>
                 <Header />
-                <Content title={"Gallery"} />
+                <Content title={"Home"} />
                 <Footer />
             </div>
         )
