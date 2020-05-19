@@ -2,3 +2,33 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.navBar {
+    background-color: #2D3C5C;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    .navBarItem {
+        padding: 14px 16px;
+        margin: 0px 10px 0px 10px;
+        text-decoration: none;
+        color: #E5DCDD;
+        &:hover {
+            color: white;
+            background-color: #4D9AAD;
+        }
+    }
+    .navBarHeader {
+        color: #FFFFFF;
+        font-size: 26px;
+        margin: 0px 20px 0px 20px;
+    }
+}
+
+.pageTitle {
+    margin: 20px;
+}

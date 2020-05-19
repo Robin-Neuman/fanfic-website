@@ -8,7 +8,7 @@ export default class Home extends React.Component {
         return (
             <div>
                 <Header />
-                <Content title={"Home"} />
+                <Content title={"Home"} />                
                 <Footer />
             </div>
         )
