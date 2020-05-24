@@ -30,12 +30,4 @@ server.get('/fanfics', function (req, res) {
     })
 })
 
-server.delete('/fanfics', function (req, res) {
-    request('http://localhost:3000/fanfics', function (err, response, body) {
-        if (!err && res.statusCode == 200) {
-            res.send(body)
-        }
-    })
-})
-
 server.listen(port, () => console.log(`Server started on port ${port}`))
