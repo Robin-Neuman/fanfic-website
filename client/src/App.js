@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
+import axios from 'axios'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Home from './pages/Home'
+import Fanfic from './pages/Fanfic'
+import Forum from './pages/Forum'
+import Gallery from './pages/Gallery'
+import Admin from './pages/Admin'
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+        users: [],
+        loaded: false
+    }
+  }
+  
+  fetchUsers() {
+    axios.get('/getUsers').then(res => {
+      return res            
+    })
+  }
+  render() {
+    const users = this.fetchUsers()  
+    return (
+      <React.Fragment>
+        <BrowserRouter>
+          <Route exact path={"/"} render={(props) => <Home {...props} users={users} />} />
+          <Route path={"/fanfic"} component={Fanfic} />
+          <Route path={"/forum"} component={Forum} />
+          <Route path={"/gallery"} component={Gallery} />
+          <Route path={"/admin"} component={Admin} />
+        </BrowserRouter>
+      </React.Fragment>
+    )
+  }
 }
 
-export default App;
