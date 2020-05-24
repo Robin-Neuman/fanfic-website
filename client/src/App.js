@@ -10,25 +10,29 @@ import Gallery from './pages/Gallery'
 import Admin from './pages/Admin'
 
 export default class App extends React.Component {
+
   constructor() {
     super();
     this.state = {
-        users: [],
-        loaded: false
+      users: {},
+      news: {},
+      loaded: false
     }
   }
-  
-  fetchUsers() {
-    axios.get('/getUsers').then(res => {
-      return res            
-    })
+
+  componentDidMount() {
+    axios.all([axios.get('/users'), axios.get('/news')]).then(axios.spread((...responses) => {
+      const users = responses[0].data
+      const news = responses[1].data
+      this.setState({ users: users, news: news, loaded: true })
+    }))
   }
+
   render() {
-    const users = this.fetchUsers()  
     return (
       <React.Fragment>
         <BrowserRouter>
-          <Route exact path={"/"} render={(props) => <Home {...props} users={users} />} />
+          <Route exact path={"/"} render={(props) => <Home {...props} users={this.state.users} news={this.state.news} />} />
           <Route path={"/fanfic"} component={Fanfic} />
           <Route path={"/forum"} component={Forum} />
           <Route path={"/gallery"} component={Gallery} />
