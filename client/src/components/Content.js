@@ -7,7 +7,7 @@ export default class Content extends React.Component {
                 <div>
                     <h1 className="pageTitle">{this.props.title}</h1>
                 </div>
-                {/* Renders out an introduction and news, store this information in the api to be changed on admin page */}
+                {/* Renders out an introduction and news, store this information in the database to be changed on admin page */}
                 {this.props.title == "Home" ? (
                     <div>
                         <div className="introduction">
