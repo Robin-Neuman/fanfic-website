@@ -4,10 +4,12 @@ import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './pages/Home'
-import Fanfic from './pages/Fanfic'
+import FanficPage from './pages/FanficPage'
 import Forum from './pages/Forum'
 import Gallery from './pages/Gallery'
 import Admin from './pages/Admin'
+import Fanfic from './components/Fanfic'
+import Chapter from './components/Chapter'
 
 export default class App extends React.Component {
 
@@ -16,15 +18,17 @@ export default class App extends React.Component {
     this.state = {
       users: {},
       news: {},
+      fanfics: {},
       loaded: false
     }
   }
 
   componentDidMount() {
-    axios.all([axios.get('/users'), axios.get('/news')]).then(axios.spread((...responses) => {
+    axios.all([axios.get('/users'), axios.get('/news'), axios.get('/fanfics')]).then(axios.spread((...responses) => {
       const users = responses[0].data
       const news = responses[1].data
-      this.setState({ users: users, news: news, loaded: true })
+      const fanfics = responses[2].data
+      this.setState({ users: users, news: news, fanfics: fanfics, loaded: true })
     }))
   }
 
@@ -33,7 +37,9 @@ export default class App extends React.Component {
       <React.Fragment>
         <BrowserRouter>
           <Route exact path={"/"} render={(props) => <Home {...props} users={this.state.users} news={this.state.news} />} />
-          <Route path={"/fanfic"} component={Fanfic} />
+          <Route exact path={"/fanficPage"} render={(props) => <FanficPage {...props} fanfics={this.state.fanfics} />} />
+          <Route exact path={"/fanficPage/fanfic:fanficId"} render={(props) => <Fanfic {...props} fanfics={this.state.fanfics} />} />
+          <Route exact path={"/fanficPage/fanfic:fanficId/chapter:chapterId"} render={(props) => <Chapter {...props} users={this.state.users} fanfics={this.state.fanfics} />} />
           <Route path={"/forum"} component={Forum} />
           <Route path={"/gallery"} component={Gallery} />
           <Route path={"/admin"} component={Admin} />

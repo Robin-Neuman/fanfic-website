@@ -8,7 +8,7 @@ export default class Navbar extends React.Component {
                 <img src=""></img>
                 <h3 className="navBarHeader">Pandis Writes</h3>
                 <Link className="navBarItem" to={"/"}>Home</Link>
-                <Link className="navBarItem" to={"/fanfic"}>Fanfic</Link>
+                <Link className="navBarItem" to={"/fanficPage"}>Fanfic</Link>
                 <Link className="navBarItem" to={"/forum"}>Forum</Link>
                 <Link className="navBarItem" to={"/gallery"}>Gallery</Link>
             </div>
