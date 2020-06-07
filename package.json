@@ -10,7 +10,7 @@
     "API": "npm start --prefix API",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "localhost:3000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Robin-Neuman/fanfic-website.git"
@@ -28,6 +28,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "request": "^2.88.2"
   },
