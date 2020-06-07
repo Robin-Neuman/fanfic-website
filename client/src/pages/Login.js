@@ -12,6 +12,7 @@ export default class Login extends React.Component {
     }
 
     handleRedirect() {
+        console.log("lel")
         if (this.state.redirect) {
             return <Redirect to="/" />
         }
