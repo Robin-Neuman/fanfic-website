@@ -34,11 +34,13 @@ body {
 }
 
 .chapter {
+    margin: 100px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     p {
+        margin: 50px;
         word-wrap: break-word; 
         white-space: pre-wrap;
         width: 60%;

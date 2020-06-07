@@ -2,24 +2,26 @@ import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import { formatText } from '../helpers'
+import Comments from './Comments'
 
 export default class Chapter extends React.Component {
   render() {
     const chapters = this.props.fanfics.chapters
-    let chapterUnparsed = this.props.match.params.fanficId.substring(1, 2)
-    let chapterParsed = Number(chapterUnparsed - 1)
+    const comments = this.props.fanfics.chapterComments
+    let chapter = this.props.match.params.fanficId
     return (
       <div>
-      <Header />
+        <Header />
         {chapters ? (
           <div className="chapter">
-            <h1>{chapters[chapterParsed].title}</h1>
-            <p>{chapters[chapterParsed].chapter_content}</p>
+            <h1>{chapters[chapter].title}</h1>
+            <p>{chapters[chapter].content}</p>
           </div>
-        ) : (
+          ) : (
             <div className="chapter" />
-          )}
-          <Footer />
+        )}
+        <Comments comments={comments} />
+        <Footer />
       </div>
     )
   }

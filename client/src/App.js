@@ -10,6 +10,7 @@ import Gallery from './pages/Gallery'
 import Admin from './pages/Admin'
 import Fanfic from './components/Fanfic'
 import Chapter from './components/Chapter'
+import Login from './pages/Login';
 
 export default class App extends React.Component {
 
@@ -24,10 +25,11 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.all([axios.get('/users'), axios.get('/news'), axios.get('/fanfics')]).then(axios.spread((...responses) => {
+    axios.all([axios.get('http://localhost:3000/users'), axios.get('http://localhost:3000/news'), axios.get('http://localhost:3000/fanfics')]).then(axios.spread((...responses) => {
       const users = responses[0].data
       const news = responses[1].data
       const fanfics = responses[2].data
+      console.log(users, news, fanfics)
       this.setState({ users: users, news: news, fanfics: fanfics, loaded: true })
     }))
   }
@@ -43,6 +45,7 @@ export default class App extends React.Component {
           <Route path={"/forum"} component={Forum} />
           <Route path={"/gallery"} component={Gallery} />
           <Route path={"/admin"} component={Admin} />
+          <Route path={"/login"} component={Login} />
         </BrowserRouter>
       </React.Fragment>
     )
