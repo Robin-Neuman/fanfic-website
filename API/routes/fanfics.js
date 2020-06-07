@@ -37,7 +37,7 @@ router.get('/', async function (req, res, next) {
             id: row.id,
             fanfic_id: row.fanfic_id,
             title: row.title,
-            chapter_content: row.chapter_content
+            content: row.chapter_content
           }
         );
       })
@@ -47,8 +47,8 @@ router.get('/', async function (req, res, next) {
             id: row.id,
             fanfic_id: row.fanfic_id,
             chapter_id: row.chapter_id,
-            comment_title: row.comment_title,
-            comment_content: row.comment_content
+            title: row.comment_title,
+            content: row.comment_content
           }
         );
       })
