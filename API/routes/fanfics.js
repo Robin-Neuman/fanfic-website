@@ -3,26 +3,42 @@ const router = express.Router();
 require('dotenv').config();
 
 const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
-  multipleStatements: true
-})
 
-connection.connect()
+var connection;
+
+var dbConfig = require('../public/configs/dbConfig');
+
+function handleConnection(dbConfig) {
+  connection = mysql.createPool(dbConfig);
+  connection.getConnection(function connectDB(err) {
+    if (err) {
+      console.error('error connecting: ' + err.stack);
+      return;
+    }
+    console.log('connected fanfics');
+  })
+}
+
+handleConnection(dbConfig)
+
+connection.on('error', function errorDB(err) {
+  if (err.code == 'PROTOCOL_CONNECTION_LOST') {
+    handleConnection(dbConfig);
+  } else {
+    throw err;
+  }
+})
 
 router.get('/', async function (req, res, next) {
 
-  connection.query('SELECT * FROM fanfics; SELECT * FROM fanfics_chapters; SELECT * FROM chapters_comments', function (err, results) {
+  connection.query('SELECT * FROM fanfics; SELECT * FROM fanfics_chapters; SELECT * FROM chapters_comments', function (err, rows) {
 
     let fanficsData = { fanfics: [], chapters: [], chapterComments: [] }
 
     if (err) {
       throw err;
     } else {
-      results[0].map((row) => {
+      rows[0].map((row) => {
         fanficsData.fanfics.push(
           {
             id: row.id,
@@ -31,7 +47,7 @@ router.get('/', async function (req, res, next) {
           }
         );
       })
-      results[1].map((row) => {
+      rows[1].map((row) => {
         fanficsData.chapters.push(
           {
             id: row.id,
@@ -41,7 +57,7 @@ router.get('/', async function (req, res, next) {
           }
         );
       })
-      results[2].map((row) => {
+      rows[2].map((row) => {
         fanficsData.chapterComments.push(
           {
             id: row.id,
