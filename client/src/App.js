@@ -26,7 +26,7 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.all([axios.get('/users'), axios.get('/news'), axios.get('/fanfics')]).then(axios.spread((...responses) => {
+    axios.all([axios.get('/users'), axios.get('/content/news'), axios.get('/content/fanfics')]).then(axios.spread((...responses) => {
       const users = responses[0].data
       const news = responses[1].data
       const fanfics = responses[2].data

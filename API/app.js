@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const https = require('https');
+require('dotenv').config();
 const cors = require('cors')
 
 const creds = {
@@ -15,11 +16,7 @@ const creds = {
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const newsRouter = require('./routes/news');
-const fanficsRouter = require('./routes/fanfics');
-const loginRouter = require('./routes/login');
-const registerRouter = require('./routes/register');
-const commentsRouter = require('./routes/comments');
+const contentRouter = require('./routes/content');
 
 const app = express();
 
@@ -44,11 +41,7 @@ app.use(bodyParser.urlencoded({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/news', newsRouter);
-app.use('/fanfics', fanficsRouter);
-app.use('/login', loginRouter);
-app.use('/register', registerRouter);
-app.use('/comments', commentsRouter);
+app.use('/content', contentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -20,7 +20,7 @@ export default class Login extends React.Component {
         e.preventDefault()
         let formData = new FormData()
         formData.set('username', 'password')
-        Axios.post('/login', 
+        Axios.post('/users/login', 
         {
             username: this.username.value,
             password: this.password.value

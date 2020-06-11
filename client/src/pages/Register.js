@@ -20,7 +20,7 @@ export default class Register extends React.Component {
         e.preventDefault()
         let formData = new FormData()
         formData.set('username', 'password')
-        Axios.post('/register', 
+        Axios.post('/users', 
         {
             username: this.username.value,
             password: this.password.value,

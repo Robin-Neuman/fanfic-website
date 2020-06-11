@@ -1,14 +1,18 @@
-import Users from '../models/Users'
+const Users = require('../models/Users')
 
-function load(req, res, next, id) {
-  Users.findById(id)
-    .exec()
-    .then((user) => {
-      req.dbUser = user
-      return next()
-    }, (e) => next(e))
+async function getUsers(req, res) {
+  let users = await Users.getUsers(500)
+  return res.json(users)
 }
 
-function get(req, res) {
-  return res.json(req.dbUser)
+async function register(req, res) {
+  let response = await Users.registerUser(req.body.username, req.body.password, req.body.email)
+  return res.send(response)
 }
+
+async function login(req, res) {
+  let token = await Users.loginUser(req.body.username, req.body.password)
+  return res.json(token)
+}
+
+module.exports = { getUsers, register, login }
