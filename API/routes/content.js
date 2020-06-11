@@ -14,4 +14,4 @@ router.post('/comment', authenticateToken, content_controller.postComment)
 
 router.delete('/comment', authenticateToken, content_controller.deleteComment)
 
-module.exports = router;
+module.exports = router; 
