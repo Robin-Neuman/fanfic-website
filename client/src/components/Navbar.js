@@ -12,6 +12,7 @@ export default class Navbar extends React.Component {
                 <Link className="navBarItem" to={"/forum"}>Forum</Link>
                 <Link className="navBarItem" to={"/gallery"}>Gallery</Link>
                 <Link className="navBarItem" to={"/login"}>Login</Link>
+                <Link className="navBarItem" to={"/register"}>Register</Link>
             </div>
         )
     }

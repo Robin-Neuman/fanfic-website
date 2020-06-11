@@ -1,17 +1,26 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors')
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const https = require('https');
+require('dotenv').config();
+const cors = require('cors')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var newsRouter = require('./routes/news');
-var fanficsRouter = require('./routes/fanfics');
-var loginRouter = require('./routes/login');
+const creds = {
+  key: fs.readFileSync(__dirname + '/public/certificates/selfsigned.key'),
+  cert: fs.readFileSync(__dirname + '/public/certificates/selfsigned.crt')
+}
 
-var app = express();
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const contentRouter = require('./routes/content');
+
+const app = express();
+
+const server = https.createServer(creds, app)
 
 app.use(cors())
 
@@ -25,11 +34,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true,
+}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/news', newsRouter);
-app.use('/fanfics', fanficsRouter);
-app.use('/login', loginRouter);
+app.use('/content', contentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,6 +59,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3005)
+server.listen(3000)
 
 module.exports = app;
