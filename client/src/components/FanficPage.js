@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Fanfics from '../components/Fanfics'
+import Header from './Header'
+import Footer from './Footer'
+import Fanfics from '../pages/Fanfics'
 
 export default class Fanfic extends React.Component {
   render() {

@@ -1,9 +1,13 @@
 const jwt = require('jsonwebtoken')
 
 async function authenticateToken(req, res, next) {
-    var token = req.headers.authorization;
-    if (token) {
-        jwt.verify(token, process.env.SECRET_TOKEN, function(err) {
+    var bearer = req.headers.authorization;
+    var token;
+    if (bearer !== undefined) {
+        token = bearer.split(' ')
+    }
+    if (token !== undefined) {
+        jwt.verify(token[1], process.env.SECRET_TOKEN, function(err) {
             if (err) {
                 return res.status(401).send({
                     success: false,

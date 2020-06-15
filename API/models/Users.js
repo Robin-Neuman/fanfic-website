@@ -66,15 +66,16 @@ async function registerUser(username, password, email) {
           if (err) {
             reject(err)
           } else {
-            console.log(rows)
-            newUserCreds.id = rows.insertId
-            DB.query(`INSERT INTO users_profiles (user_id) values ('${newUserCreds.id}')`, (err, rows) => {  
-              if (err) {
-                reject(err)
-              } else {
-                resolve(true)
-              }
-            })
+            if (rows) {
+              newUserCreds.id = rows.insertId
+              DB.query(`INSERT INTO users_profiles (user_id) values ('${newUserCreds.id}')`, (err, rows) => {  
+                if (err) {
+                  reject(err)
+                } else {
+                  resolve(true)
+                }
+              })
+            }
           }
         })
       } 
@@ -88,12 +89,12 @@ async function registerUser(username, password, email) {
 async function loginUser(username, password) {
   const query = new Promise((resolve, reject) => {
     DB.query(`SELECT id, username, email, password FROM users WHERE username = '${username}'`, (err, rows) => {
-      if (rows[0], password) {
+      if (rows[0] && password !== undefined) {
         if (err) {
           reject(err)
         } else {
           if (bcrypt.compareSync(password, rows[0].password)) {
-            jsonwebtoken.sign({ user: rows[0] }, process.env.SECRET_TOKEN, { expiresIn: '10 days'}, (error, token) => {
+            jsonwebtoken.sign({ user: rows[0] }, process.env.SECRET_TOKEN, { expiresIn: '10 m'}, (error, token) => {
               if (error) {
                 reject(error)
               } else {
@@ -104,6 +105,8 @@ async function loginUser(username, password) {
             })
           }
         }
+      } else {
+        reject('User not found')
       }
     })
   }).catch((error) => {

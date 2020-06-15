@@ -32,46 +32,59 @@ async function getFanfics(limit) {
 }
 
 // Get all chapters and comments belonging to those chapters
-async function getChapters() {
+async function getChapters(id) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`SELECT * FROM fanfics_chapters; SELECT * FROM chapters_comments`, (err, rows) => {
+    DB.query(`SELECT * FROM fanfics_chapters WHERE fanfic_id = '${id}'`, (err, rows) => {
       let chaptersData = { chapters: [] }
 
       if (err) {
         reject(err);
       } else {
-        rows[0].map((chapter) => {
-          let comments = []
-          rows[1].map((comment) => {
-            if (comment.chapter_id == chapter.id) {
-              let date = moment(comment.created).format('Do MMMM YYYY')
-              comments.push(
-                {
-                  id: comment.id,
-                  fanfic_id: comment.fanfic_id,
-                  chapter_id: comment.chapter_id,
-                  username: comment.username,
-                  title: comment.comment_title,
-                  content: comment.comment_content,
-                  img_link: comment.img_link,
-                  created: date
-                }
-              );
-            }
-          })
+        rows.map((chapter) => {
           chaptersData.chapters.push(
             {
               id: chapter.id,
               fanfic_id: chapter.fanfic_id,
               title: chapter.title,
-              content: chapter.chapter_content,
-              comments: comments
+              content: chapter.chapter_content
             }
           );
         })
       }
-      console.log(chaptersData)
       resolve(chaptersData)
+    })
+  }).catch((error) => {
+    return(error)
+  })
+  return await query
+}
+
+async function getComments(id) {
+  const query = new Promise((resolve, reject) => {
+    DB.query(`SELECT * FROM chapters_comments WHERE chapter_id = '${id}'`, (err, rows) => {
+      let commentsData = { comments: [] }
+
+      if (err) {
+        reject(err);
+      } else {
+          rows.map((comment) => {
+            let date = moment(comment.created).format('Do MMMM YYYY')
+            commentsData.comments.push(
+              {
+                id: comment.id,
+                fanfic_id: comment.fanfic_id,
+                chapter_id: comment.chapter_id,
+                user_id: comment.user_id,
+                title: comment.comment_title,
+                content: comment.comment_content,
+                img_link: comment.img_link,
+                created: date,
+                edit_mode: false
+              }
+            );
+          })
+        }
+      resolve(commentsData)
     })
   }).catch((error) => {
     return(error)
@@ -111,16 +124,13 @@ async function getNews() {
 }
 
 // Post comment on fanfic chapter
-async function postComment(fanfic_id, chapter_id, title, content, username) {
+async function postComment(fanfic_id, chapter_id, title, content, user_id) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`INSERT INTO chapter_comments (fanfic_id, chapter_id, comment_title, username) 
-                values ('${fanfic_id}', '${chapter_id}', '${title}', '${content}', '${username}')`, 
+    DB.query(`INSERT INTO chapters_comments (fanfic_id, chapter_id, comment_title, comment_content, user_id) 
+                values ('${fanfic_id}', '${chapter_id}', '${title}', '${content}', '${user_id}')`, 
     (err, rows) => {  
       if (err) {
         reject(err)
-      } 
-      if (rows.affectedRows == 0) {
-        console.log("NOT POSTED")
       } else {
         resolve(true)
       }
@@ -134,12 +144,9 @@ async function postComment(fanfic_id, chapter_id, title, content, username) {
 // Delete comment on fanfic chapter
 async function deleteComment(id) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`DELETE FROM chapter_comments WHERE id = '${id}'`, (err, rows) => {  
+    DB.query(`DELETE FROM chapters_comments WHERE id = '${id}'`, (err, rows) => {  
       if (err) {
         reject(err)
-      } 
-      if (rows.affectedRows == 0) {
-        console.log("NOT DELETED")
       } else {
         resolve(true)
       }
@@ -150,4 +157,4 @@ async function deleteComment(id) {
   return await query
 }
 
-module.exports = { getFanfics, getChapters, getNews, postComment, deleteComment }
+module.exports = { getFanfics, getChapters, getComments, getNews, postComment, deleteComment }

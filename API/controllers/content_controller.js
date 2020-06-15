@@ -6,8 +6,13 @@ async function getFanfics(req, res) {
 }
 
 async function getChapters(req, res) {
-  let chapters = await Content.getChapters()
+  let chapters = await Content.getChapters(req.params.id)
   return res.json(chapters)
+}
+
+async function getComments(req, res) {
+  let comments = await Content.getComments(req.params.id)
+  return res.json(comments)
 }
 
 async function getNews(req, res) {
@@ -17,14 +22,14 @@ async function getNews(req, res) {
 
 async function postComment(req, res) {
   let response = await Content.postComment(
-    req.body.fanfic_id, req.body.chapter_id, req.body.title, req.body.content, req.body.username
+    req.body.fanfic_id, req.body.chapter_id, req.body.title, req.body.content, req.body.user_id
   )
   return res.json(response)
 }
 
 async function deleteComment(req, res) {
-  let response = await Content.deleteComment(req.body.id)
+  let response = await Content.deleteComment(req.body.comment_id)
   return res.json(response)
 }
 
-module.exports = { getFanfics, getChapters, getNews, postComment, deleteComment }
+module.exports = { getFanfics, getChapters, getComments, getNews, postComment, deleteComment }
