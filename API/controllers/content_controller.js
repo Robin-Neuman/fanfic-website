@@ -32,4 +32,9 @@ async function deleteComment(req, res) {
   return res.json(response)
 }
 
-module.exports = { getFanfics, getChapters, getComments, getNews, postComment, deleteComment }
+async function editComment(req, res) {
+  let response = await Content.editComment(req.body.title, req.body.content, req.body.comment_id)
+  return res.json(response)
+}
+
+module.exports = { getFanfics, getChapters, getComments, getNews, postComment, deleteComment, editComment }

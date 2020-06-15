@@ -157,4 +157,19 @@ async function deleteComment(id) {
   return await query
 }
 
-module.exports = { getFanfics, getChapters, getComments, getNews, postComment, deleteComment }
+async function editComment(title, content, id) {
+  const query = new Promise((resolve, reject) => {
+    DB.query(`UPDATE chapters_comments SET comment_title = '${title}', comment_content = '${content}' WHERE id = '${id}'`, (err, rows) => {  
+      if (err) {
+        reject(err)
+      } else {
+        resolve(true)
+      }
+    })
+  }).catch((error) => {
+    return(error)
+  })
+  return await query
+}
+
+module.exports = { getFanfics, getChapters, getComments, getNews, postComment, deleteComment, editComment }

@@ -1,11 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default class Fanfics extends React.Component {
   render() {
     const fanfics = this.props.fanfics.fanfics
     return (
       <div>
+        <Header />
         {fanfics ? fanfics.map((fanfic, key) => {
           return (
             <div className="fanficItem" key={key}>
@@ -16,6 +19,7 @@ export default class Fanfics extends React.Component {
         }) : ( 
           <div className="fanficItem" />
         )}
+        <Footer />
       </div>
     )
   }

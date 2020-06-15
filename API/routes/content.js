@@ -16,4 +16,6 @@ router.post('/comment', authenticateToken, content_controller.postComment)
 
 router.delete('/comment', authenticateToken, content_controller.deleteComment)
 
+router.put('/comment', authenticateToken, content_controller.editComment)
+
 module.exports = router;

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import Home from './pages/Home'
-import FanficPage from './components/FanficPage'
+import FanficPage from './pages/Fanfics'
 import Forum from './pages/Forum'
 import Gallery from './pages/Gallery'
 import Admin from './pages/Admin'
