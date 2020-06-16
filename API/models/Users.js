@@ -94,7 +94,7 @@ async function loginUser(username, password) {
           reject(err)
         } else {
           if (bcrypt.compareSync(password, rows[0].password)) {
-            jsonwebtoken.sign({ user: rows[0] }, process.env.SECRET_TOKEN, { expiresIn: '10 m'}, (error, token) => {
+            jsonwebtoken.sign({ user: rows[0], role: "user" }, process.env.SECRET_TOKEN, { expiresIn: '10 m'}, (error, token) => {
               if (error) {
                 reject(error)
               } else {

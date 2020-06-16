@@ -8,10 +8,13 @@ import FanficPage from './pages/Fanfics'
 import Forum from './pages/Forum'
 import Gallery from './pages/Gallery'
 import Admin from './pages/Admin'
+import AdminFanfic from './pages/AdminFanfic'
 import Fanfic from './pages/Fanfic'
 import Chapter from './pages/Chapter'
 import Login from './pages/Login';
 import Register from './pages/Register';
+
+import AdminRoute from './routes/admin_route'
 
 export default class App extends React.Component {
 
@@ -46,9 +49,12 @@ export default class App extends React.Component {
           <Route exact path={"/fanfics/fanfic/:fanficId/chapter/:chapterId"} render={(props) => <Chapter {...props} users={this.state.users} fanfics={this.state.fanfics} />} />
           <Route path={"/forum"} component={Forum} />
           <Route path={"/gallery"} component={Gallery} />
-          <Route path={"/admin"} component={Admin} />
-          <Route path={"/login"} component={Login} />
+          <Route path={"/login"} render={(props) => <Login {...props} admin={false} />} />
           <Route path={"/register"} component={Register} />
+
+          <Route exact path={"/admin"} render={(props) => <Login {...props} admin={true} />} />
+          <AdminRoute exact path={"/admin/adminPage"} component={Admin} />
+          <AdminRoute exact path={"/admin/adminPage/fanfics"} component={AdminFanfic} fanfics={this.state.fanfics} />
         </BrowserRouter>
         ) : (
           <BrowserRouter />

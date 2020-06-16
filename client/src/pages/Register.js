@@ -45,7 +45,7 @@ export default class Register extends React.Component {
           <label htmlFor="username">Username</label>
           <input ref={(ref) => { this.username = ref }} name="username" required></input>
           <label htmlFor="password">Password</label>
-          <input ref={(ref) => { this.password = ref }} name="password" required></input>
+          <input ref={(ref) => { this.password = ref }} type="password" name="password" required></input>
           <label htmlFor="password">Email</label>
           <input ref={(ref) => { this.email = ref }} name="email" required></input>
           <button type="submit">Submit</button>

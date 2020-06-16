@@ -3,7 +3,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.navBar {
+.navBar, .adminHeader {
   background-color: #2D3C5C;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,19 +23,19 @@ body {
   padding: 0;
 }
 
-.navBar .navBarItem {
+.navBar .navBarItem, .adminHeader .navBarItem {
   padding: 14px 16px;
   margin: 0px 10px 0px 10px;
   text-decoration: none;
   color: #E5DCDD;
 }
 
-.navBar .navBarItem:hover {
+.navBar .navBarItem:hover, .adminHeader .navBarItem:hover {
   color: white;
   background-color: #4D9AAD;
 }
 
-.navBar .navBarHeader {
+.navBar .navBarHeader, .adminHeader .navBarHeader {
   color: #FFFFFF;
   font-size: 26px;
   margin: 0px 20px 0px 20px;
