@@ -20,5 +20,5 @@ export default class AdminFanfic extends React.Component {
         <AdminFanfics fanfics={this.state.fanfics} admin={true} />
       </div> 
     )
-  }
+  } 
 }
