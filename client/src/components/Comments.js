@@ -1,4 +1,5 @@
 import React from 'react'
+import jwt_decode from 'jwt-decode'
 
 export default class Comments extends React.Component {
 
@@ -19,6 +20,10 @@ export default class Comments extends React.Component {
           const chapter = this.props.chapter
           const token = this.props.token
           const users = this.props.users.users
+          let decoded = false
+          if (token !== undefined && token !== null) {
+            decoded = jwt_decode(token)
+          }
 
           return (
             <div className="commentItem" id={comment.id} user_id={comment.user_id} key={key}>
@@ -51,9 +56,9 @@ export default class Comments extends React.Component {
                     <p>{comment.created}</p>
                   </div>
                 )}
-              {this.props.decoded.user.id == comment.user_id ? (
+              {token !== undefined && token !== null ? (
                 <div>
-                  {!comment.edit_mode ? (
+                  {!comment.edit_mode && decoded.user.id == comment.user_id ? (
                     <div>
                       <button onClick={function(e) {e.preventDefault(); deleteComment(comment.id, comment.chapter_id, chapter, token, fetchComments)}}>Delete</button>                
                       <button onClick={function() {editComment(comment.id, true)}}>Edit</button>
