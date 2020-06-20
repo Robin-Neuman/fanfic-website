@@ -17,9 +17,11 @@ export default class Comments extends React.Component {
           const editComment = this.props.editComment
           const submitEdit = this.props.submitEdit
           const fetchComments = this.props.fetchComments
+          const isLoggedIn = this.props.isLoggedIn
           const chapter = this.props.chapter
           const token = this.props.token
           const users = this.props.users.users
+          console.log(isLoggedIn(token, "user"))
           let decoded = false
           if (token !== undefined && token !== null) {
             decoded = jwt_decode(token)
@@ -58,7 +60,7 @@ export default class Comments extends React.Component {
                 )}
               {token !== undefined && token !== null ? (
                 <div>
-                  {!comment.edit_mode && decoded.user.id == comment.user_id ? (
+                  {!comment.edit_mode && decoded.user.id == comment.user_id && isLoggedIn(token, "user") ? (
                     <div>
                       <button onClick={function(e) {e.preventDefault(); deleteComment(comment.id, comment.chapter_id, chapter, token, fetchComments)}}>Delete</button>                
                       <button onClick={function() {editComment(comment.id, true)}}>Edit</button>

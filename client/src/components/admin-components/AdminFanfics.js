@@ -10,8 +10,8 @@ export default class AdminFanfics extends React.Component {
           {fanfics ? fanfics.map((fanfic, key) => {
             return (
               <div className="fanficItem" key={key}>
-                <h1>{fanfic.title}</h1>
-                <button>Edit</button>
+                <h1>{fanfic.title}</h1>                
+                <Link className="navBarItem" to={"/admin/adminPage/fanfics/edit/" + fanfic.id}><button>Edit</button></Link>
               </div>
             )
           }) : ( 

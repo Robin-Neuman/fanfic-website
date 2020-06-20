@@ -7,9 +7,10 @@ import Home from './pages/Home'
 import FanficPage from './pages/Fanfics'
 import Forum from './pages/Forum'
 import Gallery from './pages/Gallery'
-import Admin from './pages/Admin'
-import AdminFanfic from './pages/AdminFanfic'
-import AdminFanficEdit from './pages/AdminFanficEdit'
+import Admin from './pages/admin-pages/Admin'
+import AdminFanfic from './pages/admin-pages/AdminFanfic'
+import AdminFanficEdit from './pages/admin-pages/AdminFanficEdit'
+import AdminChapterEdit from './pages/admin-pages/AdminChapterEdit'
 import Fanfic from './pages/Fanfic'
 import Chapter from './pages/Chapter'
 import Login from './pages/Login';
@@ -56,7 +57,8 @@ export default class App extends React.Component {
           <Route exact path={"/admin"} render={(props) => <Login {...props} admin={true} />} />
           <AdminRoute exact path={"/admin/adminPage"} component={Admin} />
           <AdminRoute exact path={"/admin/adminPage/fanfics"} component={AdminFanfic} fanfics={this.state.fanfics} />
-          <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:id"} component={AdminFanficEdit} fanfics={this.state.fanfics} />
+          <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:fanficId"} component={AdminFanficEdit} fanfics={this.state.fanfics} />
+          <AdminRoute exact path={"/admin/adminPage/chapter/edit/:chapterId"} component={AdminChapterEdit} fanfics={this.state.fanfics} />
         </BrowserRouter>
         ) : (
           <BrowserRouter />
