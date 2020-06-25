@@ -35,6 +35,7 @@ export default class Login extends React.Component {
             if (response.data.token) {
               localStorage.removeItem('token')
               localStorage.setItem('token', response.data.token)
+              this.props.handleLogin()
               this.setState({ redirect: true })
             } else {
               console.log(response.data)
@@ -50,6 +51,7 @@ export default class Login extends React.Component {
         .then((response) => {
           if (response.data) {
             if (response.data.token) {
+              localStorage.removeItem('token')
               localStorage.setItem('token', response.data.token)
               this.setState({ redirect: true })
             } else {

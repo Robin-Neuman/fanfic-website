@@ -2,6 +2,7 @@ import React from 'react'
 import AdminHeader from '../../components/admin-components/AdminHeader'
 import AdminSidebar from '../../components/admin-components/AdminSidebar'
 import { Link } from 'react-router-dom'
+import Quill from 'react-quill'
 
 export default class AdminFanficEdit extends React.Component {
   constructor(props) {
@@ -23,8 +24,8 @@ export default class AdminFanficEdit extends React.Component {
               return (
                 <div key={key}>
                   <form>
-                    <input defaultValue={chapter.title}></input>                    
-                    <textarea defaultValue={chapter.content}></textarea>
+                    <input defaultValue={chapter.title}></input>   
+                    <Quill theme="snow" value={chapter.content} />
                     <button type="submit">Submit</button>
                   </form>
                 </div>

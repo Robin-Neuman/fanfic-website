@@ -4,7 +4,6 @@ import Footer from '../components/Footer'
 import Axios from 'axios'
 import Comments from '../components/Comments'
 import jwt_decode from 'jwt-decode'
-import { isLoggedIn } from '../helpers'
 
 export default class Chapter extends React.Component {
   constructor(props) {
@@ -12,7 +11,8 @@ export default class Chapter extends React.Component {
     this.state = {
       loaded: false,
       chapter: this.props.location.state.chapter,
-      token: localStorage.getItem('token')
+      token: this.props.token,
+      loggedIn: this.props.loggedIn
     }
     this.fetchComments = this.fetchComments.bind(this)
     this.editComment = this.editComment.bind(this)
@@ -151,7 +151,7 @@ export default class Chapter extends React.Component {
         <Comments token={this.state.token} chapterId={this.props.match.params.chapterId}
           fanficId={this.props.match.params.fanficId} chapter={this.state.chapter} resetFields={this.resetFields}
           postComment={this.postComment} submitEdit={this.submitEdit} editComment={this.editComment} deleteComment={this.deleteComment}
-          fetchComments={this.fetchComments} users={this.props.users} isLoggedIn={isLoggedIn} />
+          fetchComments={this.fetchComments} users={this.props.users} loggedIn={this.state.loggedIn} />
         <Footer />
       </div>
     )

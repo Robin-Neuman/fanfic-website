@@ -21,5 +21,7 @@ export function isLoggedIn(token, role) {
     } else {
       return false
     }
+  } else {
+    return false
   }
 }

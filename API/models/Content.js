@@ -132,7 +132,7 @@ async function postComment(fanfic_id, chapter_id, title, content, user_id) {
       if (err) {
         reject(err)
       } else {
-        resolve(true)
+        resolve(rows[0])
       }
     })
   }).catch((error) => {
@@ -148,7 +148,7 @@ async function deleteComment(id) {
       if (err) {
         reject(err)
       } else {
-        resolve(true)
+        resolve(rows[0])
       }
     })
   }).catch((error) => {
@@ -163,7 +163,7 @@ async function editComment(title, content, id) {
       if (err) {
         reject(err)
       } else {
-        resolve(true)
+        resolve(rows[0])
       }
     })
   }).catch((error) => {
