@@ -18,7 +18,8 @@ async function getFanfics(limit) {
             {
               id: row.id,
               title: row.title,
-              summary: row.summary
+              summary: row.summary,
+              mode: 'view'
             }
           );
         })
@@ -46,7 +47,8 @@ async function getChapters(id) {
               id: chapter.id,
               fanfic_id: chapter.fanfic_id,
               title: chapter.title,
-              content: chapter.chapter_content
+              content: chapter.chapter_content,
+              mode: 'view'
             }
           );
         })
@@ -79,7 +81,7 @@ async function getComments(id) {
                 content: comment.comment_content,
                 img_link: comment.img_link,
                 created: date,
-                edit_mode: false
+                mode: 'view'
               }
             );
           })

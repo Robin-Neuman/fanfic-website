@@ -15,7 +15,7 @@ export default class Chapter extends React.Component {
       loggedIn: this.props.loggedIn
     }
     this.fetchComments = this.fetchComments.bind(this)
-    this.editComment = this.editComment.bind(this)
+    this.switchMode = this.switchMode.bind(this)
   }
 
   fetchComments(id, chapter) {
@@ -81,11 +81,11 @@ export default class Chapter extends React.Component {
     }        
   }
 
-  editComment(id, edit_mode) {
+  switchMode(id, mode) {
     let chapter = this.state.chapter
     for (let i = 0; i < chapter.comments.length; i++) {
-      if (chapter.comments[i].id == id) {
-        chapter.comments[i].edit_mode = edit_mode
+      if (chapter.comments[i].id === id) {
+        chapter.comments[i].mode = mode
         this.setState({ chapter: chapter })
       }
     }
@@ -102,8 +102,8 @@ export default class Chapter extends React.Component {
     const fetchComments = this.props.fetchComments
     try {
       for (let i = 0; i < chapter.comments.length; i++) {
-        if (chapter.comments[i].id == comment_id) {
-          if (chapter.comments[i].title == title && chapter.comments[i].content == content) {
+        if (chapter.comments[i].id === comment_id) {
+          if (chapter.comments[i].title === title && chapter.comments[i].content === content) {
             return false
           } else {
             Axios({
@@ -150,7 +150,7 @@ export default class Chapter extends React.Component {
           )}
         <Comments token={this.state.token} chapterId={this.props.match.params.chapterId}
           fanficId={this.props.match.params.fanficId} chapter={this.state.chapter} resetFields={this.resetFields}
-          postComment={this.postComment} submitEdit={this.submitEdit} editComment={this.editComment} deleteComment={this.deleteComment}
+          postComment={this.postComment} submitEdit={this.submitEdit} switchMode={this.switchMode} deleteComment={this.deleteComment}
           fetchComments={this.fetchComments} users={this.props.users} loggedIn={this.state.loggedIn} />
         <Footer />
       </div>

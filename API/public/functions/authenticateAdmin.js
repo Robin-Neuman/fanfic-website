@@ -24,7 +24,7 @@ async function authenticateAdminToken(req, res, next) {
         } else {
             return res.status(401).send({
                 success: false,
-                message: 'User not signed in as admin.'
+                message: 'User is not signed in as admin.'
             });
         }
     } else {

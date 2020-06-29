@@ -12,7 +12,7 @@ export function isLoggedIn(token, role) {
       if (Date.now() >= decoded.exp * 1000) {
         return false
       } else {
-        if (decoded.role == role) {
+        if (decoded.role === role) {
           return true
         } else {
           return false

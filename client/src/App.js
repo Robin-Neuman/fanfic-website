@@ -10,7 +10,6 @@ import Gallery from './pages/Gallery'
 import Admin from './pages/admin-pages/Admin'
 import AdminFanfic from './pages/admin-pages/AdminFanfic'
 import AdminFanficEdit from './pages/admin-pages/AdminFanficEdit'
-import AdminChapterEdit from './pages/admin-pages/AdminChapterEdit'
 import Fanfic from './pages/Fanfic'
 import Chapter from './pages/Chapter'
 import Login from './pages/Login';
@@ -44,7 +43,6 @@ export default class App extends React.Component {
       const users = responses[0].data
       const news = responses[1].data
       const fanfics = responses[2].data
-      console.log(users, news, fanfics)
       this.setState({ users: users, news: news, fanfics: fanfics, loaded: true, 
                       loggedIn: isLoggedIn(localStorage.getItem('token'), "user")})
     }))
@@ -69,7 +67,6 @@ export default class App extends React.Component {
           <AdminRoute exact path={"/admin/adminPage"} component={Admin} />
           <AdminRoute exact path={"/admin/adminPage/fanfics"} component={AdminFanfic} fanfics={this.state.fanfics} />
           <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:fanficId"} component={AdminFanficEdit} fanfics={this.state.fanfics} />
-          <AdminRoute exact path={"/admin/adminPage/chapter/edit/:chapterId"} component={AdminChapterEdit} fanfics={this.state.fanfics} />
         </BrowserRouter>
         ) : (
           <BrowserRouter />
