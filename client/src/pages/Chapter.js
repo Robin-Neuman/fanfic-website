@@ -102,7 +102,7 @@ export default class Chapter extends React.Component {
     const fetchComments = this.props.fetchComments
     try {
       for (let i = 0; i < chapter.comments.length; i++) {
-        if (chapter.comments[i].id === comment_id) {
+        if (chapter.comments[i].id == comment_id) {
           if (chapter.comments[i].title === title && chapter.comments[i].content === content) {
             return false
           } else {

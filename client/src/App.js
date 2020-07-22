@@ -9,7 +9,7 @@ import Forum from './pages/Forum'
 import Gallery from './pages/Gallery'
 import Admin from './pages/admin-pages/Admin'
 import AdminFanfic from './pages/admin-pages/AdminFanfic'
-import AdminFanficEdit from './pages/admin-pages/AdminFanficEdit'
+import AdminFanficPage from './pages/admin-pages/AdminFanficPage'
 import Fanfic from './pages/Fanfic'
 import Chapter from './pages/Chapter'
 import Login from './pages/Login';
@@ -56,8 +56,8 @@ export default class App extends React.Component {
           <Route exact path={"/"} render={(props) => <Home {...props} users={this.state.users} news={this.state.news} />} />
           <Route exact path={"/fanfics"} render={(props) => <FanficPage {...props} fanfics={this.state.fanfics} />} />
           <Route exact path={"/fanfics/fanfic/:fanficId"} render={(props) => <Fanfic {...props} fanfics={this.state.fanfics} />} />
-          <Route exact path={"/fanfics/fanfic/:fanficId/chapter/:chapterId"} render={(props) => <Chapter {...props} users={this.state.users} 
-                            fanfics={this.state.fanfics} token={this.state.token} loggedIn={this.state.loggedIn} />} />
+          <Route exact path={"/fanfics/fanfic/:fanficId/chapter/:chapterId"} 
+            render={(props) => <Chapter {...props} users={this.state.users} fanfics={this.state.fanfics} token={this.state.token} loggedIn={this.state.loggedIn} />} />
           <Route path={"/forum"} component={Forum} />
           <Route path={"/gallery"} component={Gallery} />
           <Route path={"/login"} render={(props) => <Login {...props} admin={false} handleLogin={this.handleLogin} />} />
@@ -66,7 +66,7 @@ export default class App extends React.Component {
           <Route exact path={"/admin"} render={(props) => <Login {...props} admin={true} />} />
           <AdminRoute exact path={"/admin/adminPage"} component={Admin} />
           <AdminRoute exact path={"/admin/adminPage/fanfics"} component={AdminFanfic} fanfics={this.state.fanfics} />
-          <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:fanficId"} component={AdminFanficEdit} fanfics={this.state.fanfics} />
+          <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:fanficId"} component={AdminFanficPage} fanfics={this.state.fanfics} token={this.state.token} />
         </BrowserRouter>
         ) : (
           <BrowserRouter />

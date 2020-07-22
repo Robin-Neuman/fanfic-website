@@ -11,12 +11,12 @@ async function postFanfic(req, res) {
 }
 
 async function editFanfic(req, res) {
-  let response = await Admin.editFanfic(req.body.title, req.body.summary, req.params.fanfic_id)
+  let response = await Admin.editFanfic(req.body.title, req.body.summary, req.body.fanfic_id)
   return res.json(response)
 }
 
 async function deleteFanfic(req, res) {
-  let response = await Admin.deleteFanfic(req.params.fanfic_id)
+  let response = await Admin.deleteFanfic(req.body.fanfic_id)
   return res.json(response)
 }
 
@@ -26,7 +26,7 @@ async function postChapter(req, res) {
 }
 
 async function editChapter(req, res) {
-  let response = await Admin.editChapter(req.body.title, req.body.summary, req.params.chapter_id)
+  let response = await Admin.editChapter(req.body.title, req.body.summary, req.body.chapter_id)
   return res.json(response)
 }
 

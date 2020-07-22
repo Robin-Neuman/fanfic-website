@@ -7,17 +7,17 @@ require('dotenv').config();
 router.post('/login', admin_controller.loginAdmin)
 
 // Fanfic routes
-router.post('/fanfic/:id', authenticateAdminToken, admin_controller.postFanfic)
+router.post('/fanfic', authenticateAdminToken, admin_controller.postFanfic)
 
-router.put('/fanfic/:id', authenticateAdminToken, admin_controller.editFanfic)
+router.put('/fanfic', authenticateAdminToken, admin_controller.editFanfic)
 
-router.delete('/fanfic/:id', authenticateAdminToken, admin_controller.deleteFanfic)
+router.delete('/fanfic', authenticateAdminToken, admin_controller.deleteFanfic)
 
 // Chapter routes
-router.post('/chapter/:id', authenticateAdminToken, admin_controller.postChapter)
+router.post('/chapter', authenticateAdminToken, admin_controller.postChapter)
 
-router.put('/chapter/:id', authenticateAdminToken, admin_controller.editChapter)
+router.put('/chapter', authenticateAdminToken, admin_controller.editChapter)
 
-router.delete('/chapter/:id', authenticateAdminToken, admin_controller.deleteChapter)
+router.delete('/chapter', authenticateAdminToken, admin_controller.deleteChapter)
 
 module.exports = router;

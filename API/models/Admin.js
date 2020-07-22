@@ -58,7 +58,7 @@ async function postFanfic(title, summary) {
 
 async function editFanfic(title, summary, id) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`UPDATE fanfics SET title = '${title}', summary = '${summary}' WHERE id = '${id}'`, (err, rows) => {
+    DB.query(`UPDATE fanfics SET title = "${title}", summary = "${summary}" WHERE id = "${id}"`, (err, rows) => {
       if (err) {
         reject(err)
       } else {

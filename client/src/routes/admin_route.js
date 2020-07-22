@@ -11,7 +11,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={props =>
         auth(localStorage.getItem("token"), "admin") ? (
-          <Component {...props} fanfics={rest.fanfics} admin={true} />
+          <Component {...props} fanfics={rest.fanfics} token={rest.token} admin={true} />
         ) : (
           <Redirect to={{ pathname: '/admin', state: { from: props.location } }} />
         )
