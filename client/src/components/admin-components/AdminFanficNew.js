@@ -1,6 +1,8 @@
 import React from 'react'
 
-export default class AdminNewFanfic extends React.Component {
+// SUPPOSED TO BE INTEGRATED AS MODAL!
+
+export default class AdminFanficNew extends React.Component {
   render() {
     return (
       <div>

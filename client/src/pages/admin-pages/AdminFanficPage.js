@@ -4,6 +4,7 @@ import AdminSidebar from '../../components/admin-components/AdminSidebar'
 import AdminChapterEdit from '../../components/admin-components/AdminChapterEdit'
 import AdminFanficEdit from '../../components/admin-components/AdminFanficEdit'
 import Axios from 'axios'
+import Select from 'react-select'
 
 export default class AdminFanficPage extends React.Component {
   constructor(props) {
@@ -13,10 +14,11 @@ export default class AdminFanficPage extends React.Component {
       fanfics: this.props.fanfics.fanfics,
       newFanficHidden: true,
       newChapterHidden: true,
-      selectedChapter: 1
+      selectedChapter: 3
     }
     this.fetchChapters = this.fetchChapters.bind(this)
     this.switchMode = this.switchMode.bind(this)
+    this.selectChapter = this.selectChapter.bind(this)
   }
 
   fetchChapters() {
@@ -30,16 +32,37 @@ export default class AdminFanficPage extends React.Component {
     }
   }
 
-  selectChapter() {
-
+  selectChapter(sel) {
+    this.setState({ selectedChapter: sel.value })
   }
 
   newFanfic() {
-
+    const fanfic_id = this.id.value
+    const title = this.newFanficTitle.value
+    const summary = this.newSummary.value
+    const token = this.props.token
+    try {
+      Axios({
+        url: '/admin/fanfic',
+        method: 'post',
+        data: {
+          title: title,
+          summary: summary,
+          fanfic_id: fanfic_id
+        },
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            console.log(response.data)
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  editFanfic(e) {
-    e.preventDefault()
+  editFanfic() {
     const fanfic_id = this.id.value
     const title = this.newFanficTitle.value
     const summary = this.newSummary.value
@@ -65,8 +88,24 @@ export default class AdminFanficPage extends React.Component {
     }
   }
 
-  deleteFanfic() {
-
+  deleteFanfic(id, token) {
+    try {
+      Axios({
+        url: '/admin/fanfic',
+        method: 'delete',
+        data: {
+          fanfic_id: id
+        },
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            console.log(response.data)
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   newChapter() {
@@ -110,6 +149,22 @@ export default class AdminFanficPage extends React.Component {
               fanfics={fanfics} fanficId={this.props.match.params.fanficId} deleteFanfic={this.deleteFanfic}
               editFanfic={this.editFanfic} switchMode={this.switchMode} token={this.props.token}
             />
+            <div>
+              <Select
+                defaultValue={this.state.chapters.map((chapter, key) => {
+                  if (selectedChapter == chapter.id) {
+                    return (
+                      {value: chapter.id, label: chapter.title}
+                    )
+                  }
+                })}
+                options={this.state.chapters.map((chapter, key) => {
+                  return (
+                    {value: chapter.id, label: chapter.title}
+                  )
+                })}
+                onChange={this.selectChapter} />
+            </div>
             {this.state.chapters.map((chapter, key) => {
               if (selectedChapter == chapter.id) {
                 return (

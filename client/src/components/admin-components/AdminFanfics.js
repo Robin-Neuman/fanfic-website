@@ -6,7 +6,7 @@ export default class AdminFanfics extends React.Component {
     const fanfics = this.props.fanfics.fanfics
     return (
       <div className="adminFanfics">
-        <div className="fanficsCont">
+        <div className="fanficsCont">                   
           {fanfics ? fanfics.map((fanfic, key) => {
             return (
               <div className="fanficItem" key={key}>
@@ -17,9 +17,6 @@ export default class AdminFanfics extends React.Component {
           }) : ( 
             <div className="fanficItem" />
           )}
-        </div>
-        <div>
-          <button>New</button>
         </div>
       </div>
     )
