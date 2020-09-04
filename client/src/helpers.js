@@ -5,18 +5,20 @@ export function formatText(text) {
   return replacedText
 }
 
-export function isLoggedIn(token, role) {
+// Shorten this func and maybe not have it as a helper
+export function isLoggedIn(token, roles) {
   if (token !== undefined && token !== null) {
     let decoded = jwt_decode(token)
     if (decoded !== undefined && decoded !== null) {
       if (Date.now() >= decoded.exp * 1000) {
         return false
       } else {
-        if (decoded.role === role) {
-          return true
-        } else {
-          return false
+        for (let i = 0; i < roles.length; i++) {
+          if (decoded.role === roles[i]) {
+            return true
+          }
         }
+        return false
       }
     } else {
       return false

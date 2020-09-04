@@ -6,7 +6,7 @@ export default class Gallery extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header loggedIn={this.props.loggedIn} />
                 <Footer />
             </div>
         )

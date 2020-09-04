@@ -8,7 +8,7 @@ export default class Fanfics extends React.Component {
     const fanfics = this.props.fanfics.fanfics
     return (
       <div>
-        <Header />
+        <Header loggedIn={this.props.loggedIn} />
         {fanfics ? fanfics.map((fanfic, key) => {
           return (
             <div className="fanficItem" key={key}>

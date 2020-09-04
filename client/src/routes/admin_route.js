@@ -4,13 +4,11 @@ import { Redirect, Route } from 'react-router-dom'
 
 const AdminRoute = ({ component: Component, ...rest }) => {
 
-  // Add your own authentication on the below line.
-  const auth = isLoggedIn
   return (
     <Route
       {...rest}
       render={props =>
-        auth(localStorage.getItem("token"), "admin") ? (
+        isLoggedIn(localStorage.getItem("token"), ["admin"]) ? (
           <Component {...props} fanfics={rest.fanfics} token={rest.token} admin={true} />
         ) : (
           <Redirect to={{ pathname: '/admin', state: { from: props.location } }} />

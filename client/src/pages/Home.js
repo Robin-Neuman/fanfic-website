@@ -8,7 +8,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header loggedIn={this.props.loggedIn} />
         <div>
           <h1 className="pageTitle">Home</h1>
           <div className="introduction">

@@ -17,6 +17,7 @@ import Register from './pages/Register';
 import { isLoggedIn } from './helpers'
 
 import AdminRoute from './routes/admin_route'
+import LoginRoute from './routes/login_route'
 
 export default class App extends React.Component {
 
@@ -32,10 +33,14 @@ export default class App extends React.Component {
     }
     this.handleLogin = this.handleLogin.bind(this)
   }
+  
+  handleLogout() {
+    localStorage.removeItem('token')
+    this.setState({ loggedIn: false, token: "" })
+  }
 
   handleLogin() {
-    console.log(isLoggedIn(localStorage.getItem('token'), "user"))
-    this.setState({ loggedIn: isLoggedIn(localStorage.getItem('token'), "user"), token: localStorage.getItem('token') })
+    this.setState({ loggedIn: isLoggedIn(localStorage.getItem('token'), ["user"]), token: localStorage.getItem('token') })
   }
 
   componentDidMount() {
@@ -44,7 +49,7 @@ export default class App extends React.Component {
       const news = responses[1].data
       const fanfics = responses[2].data
       this.setState({ users: users, news: news, fanfics: fanfics, loaded: true, 
-                      loggedIn: isLoggedIn(localStorage.getItem('token'), "user")})
+                      loggedIn: isLoggedIn(localStorage.getItem('token'), ["user"])})
     }))
   }
 
@@ -53,20 +58,20 @@ export default class App extends React.Component {
       <React.Fragment>
         {this.state.loaded ? (
           <BrowserRouter>
-          <Route exact path={"/"} render={(props) => <Home {...props} users={this.state.users} news={this.state.news} />} />
-          <Route exact path={"/fanfics"} render={(props) => <FanficPage {...props} fanfics={this.state.fanfics} />} />
-          <Route exact path={"/fanfics/fanfic/:fanficId"} render={(props) => <Fanfic {...props} fanfics={this.state.fanfics} />} />
+          <Route exact path={"/"} render={(props) => <Home {...props} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} users={this.state.users} news={this.state.news} />} />
+          <Route exact path={"/fanfics"} render={(props) => <FanficPage {...props} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} fanfics={this.state.fanfics} />} />
+          <Route exact path={"/fanfics/fanfic/:fanficId"} render={(props) => <Fanfic {...props} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} fanfics={this.state.fanfics} />} />
           <Route exact path={"/fanfics/fanfic/:fanficId/chapter/:chapterId"} 
-            render={(props) => <Chapter {...props} users={this.state.users} fanfics={this.state.fanfics} token={this.state.token} loggedIn={this.state.loggedIn} />} />
-          <Route path={"/forum"} component={Forum} />
-          <Route path={"/gallery"} component={Gallery} />
-          <Route path={"/login"} render={(props) => <Login {...props} admin={false} handleLogin={this.handleLogin} />} />
-          <Route path={"/register"} component={Register} />
+            render={(props) => <Chapter {...props} loggedIn={this.state.loggedIn} handleLogout={this.handleLogout} users={this.state.users} fanfics={this.state.fanfics} token={this.state.token} loggedIn={this.state.loggedIn} />} />
+          <Route path={"/forum"} component={Forum} loggedIn={this.state.loggedIn} />
+          <Route path={"/gallery"} component={Gallery} loggedIn={this.state.loggedIn}/>
+          <LoginRoute path={"/login"} component={Login} admin={false} handleLogin={this.handleLogin} />
+          <Route path={"/register"} component={Register} loggedIn={this.state.loggedIn} />
 
-          <Route exact path={"/admin"} render={(props) => <Login {...props} admin={true} />} />
-          <AdminRoute exact path={"/admin/adminPage"} component={Admin} />
-          <AdminRoute exact path={"/admin/adminPage/fanfics"} component={AdminFanfic} fanfics={this.state.fanfics} />
-          <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:fanficId"} component={AdminFanficPage} fanfics={this.state.fanfics} token={this.state.token} />
+          <LoginRoute exact path={"/admin"} component={Login} admin={true} />
+          <AdminRoute exact path={"/admin/adminPage"} component={Admin} handleLogout={this.handleLogout} />
+          <AdminRoute exact path={"/admin/adminPage/fanfics"} component={AdminFanfic} handleLogout={this.handleLogout} fanfics={this.state.fanfics} />
+          <AdminRoute exact path={"/admin/adminPage/fanfics/edit/:fanficId"} component={AdminFanficPage} handleLogout={this.handleLogout} fanfics={this.state.fanfics} token={this.state.token} />
         </BrowserRouter>
         ) : (
           <BrowserRouter />

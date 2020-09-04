@@ -1,6 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
+import Header from '../components/Header'
 
 export default class Register extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ export default class Register extends React.Component {
     return (
       <div>
         {this.handleRedirect()}
+        <Header loggedIn={this.props.loggedIn} />
         <form onSubmit={this.handleSubmit}>
           <h2>Register</h2>
           <label htmlFor="username">Username</label>

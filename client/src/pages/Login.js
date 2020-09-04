@@ -1,13 +1,15 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
+import Header from '../components/Header'
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       redirect: false,
-      admin: this.props.admin
+      admin: this.props.admin,
+      loginResponse: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -39,6 +41,7 @@ export default class Login extends React.Component {
               this.setState({ redirect: true })
             } else {
               console.log(response.data)
+              this.setState({ loginResponse: response.data.message })
             }
           }
         })
@@ -66,8 +69,10 @@ export default class Login extends React.Component {
     return (
       <div>
         {this.handleRedirect()}
+        <Header loggedIn={this.props.loggedIn} />
         <form onSubmit={this.handleSubmit}>
           <h2>Login</h2>
+          <h3>{this.state.loginResponse}</h3>
           <label htmlFor="username">Username</label>
           <input ref={(ref) => { this.username = ref }} name="username" required></input>
           <label htmlFor="password">Password</label>
