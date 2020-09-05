@@ -3,7 +3,6 @@ const DB = require('./DB');
 // Fanfic functions
 async function postFanfic(title, summary) {
   const query = new Promise((resolve, reject) => {
-    console.log("Here")
     DB.query(`SELECT * FROM fanfics WHERE title = '${title}'`, (err, rows) => {
       if (rows[0]) {
         reject("Fanfic with that name already exists")
@@ -82,6 +81,7 @@ async function postChapter(title, content, id) {
 }
 
 async function editChapter(title, content, fanfic_id, id) {
+  console.log(title, content, fanfic_id, id)
   const query = new Promise((resolve, reject) => {
     DB.query(`UPDATE fanfics_chapters SET title = '${title}', chapter_content = '${content}', fanfic_id = '${fanfic_id}' WHERE id = '${id}'`, (err, rows) => {
       if (err) {
@@ -97,6 +97,7 @@ async function editChapter(title, content, fanfic_id, id) {
 }
 
 async function deleteChapter(id) {
+  console.log(id)
   const query = new Promise((resolve, reject) => {
     DB.query(`DELETE FROM fanfics_chapters WHERE id = ${id}`, (err, rows) => {
       if (err) {

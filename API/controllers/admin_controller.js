@@ -16,17 +16,17 @@ async function deleteFanfic(req, res) {
 }
 
 async function postChapter(req, res) {
-  let response = await Admin.postChapter(req.body.title, req.body.summary)
+  let response = await Admin.postChapter(req.body.title, req.body.summary, req.body.id)
   return res.json(response)
 }
 
 async function editChapter(req, res) {
-  let response = await Admin.editChapter(req.body.title, req.body.summary, req.body.chapter_id)
+  let response = await Admin.editChapter(req.body.title, req.body.content, req.body.fanfic_id, req.body.id)
   return res.json(response)
 }
 
 async function deleteChapter(req, res) {
-  let response = await Admin.deleteChapter(req.params.chapter_id)
+  let response = await Admin.deleteChapter(req.body.id)
   return res.json(response)
 }
 

@@ -13,11 +13,18 @@ export default class AdminFanficPage extends React.Component {
     this.state = {
       loaded: false,
       fanfics: this.props.fanfics.fanfics,
-      newChapterHidden: true,
-      selectedChapter: 3
+      newHidden: {
+        fanfic: true,
+        chapter: true
+      },
+      editHidden: {
+        fanfic: true,
+        chapter: true
+      },
+      selectedChapter: 0
     }
     this.fetchChapters = this.fetchChapters.bind(this)
-    this.switchMode = this.switchMode.bind(this)
+    this.displayForm = this.displayForm.bind(this)
     this.selectChapter = this.selectChapter.bind(this)
   }
 
@@ -26,9 +33,33 @@ export default class AdminFanficPage extends React.Component {
       Axios.get(`/content/chapters/${this.props.match.params.fanficId}`)
         .then((response) => {
           if (response.data) {
-            this.setState({ loaded: true, chapters: response.data.chapters })
+            this.setState({ loaded: true, chapters: response.data.chapters, selectedChapter: response.data.chapters[0].id })
           }
         })
+    }
+  }
+
+  displayForm(item, type, mode) {
+    console.log(item, type, mode)
+    const newHidden = this.state.newHidden
+    const editHidden = this.state.editHidden
+
+    if (item == 'fanfic') {
+      if (type == 'new') {
+        newHidden.fanfic = mode
+        this.setState({ newHidden: newHidden })
+      } else if (type == 'edit') {
+        editHidden.fanfic = mode
+        this.setState({ editHidden: editHidden })
+      }
+    } else if (item == 'chapter') {
+      if (type == 'new') {
+        newHidden.chapter = mode
+        this.setState({ newHidden: newHidden })
+      } else if (type == 'edit') {
+        editHidden.chapter = mode
+        this.setState({ editHidden: editHidden })
+      }
     }
   }
 
@@ -63,24 +94,76 @@ export default class AdminFanficPage extends React.Component {
   }
 
   newChapter() {
-
+    const title = this.chapterTitle.value
+    const body = this.body.value
+    const token = this.props.token
+    const fanfic_id = this.props.fanficId
+    try {
+      Axios({
+        url: '/admin/chapter',
+        method: 'post',
+        data: {
+          title: title,
+          summary: body,
+          id: fanfic_id
+        },
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            console.log(response.data)
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   editChapter() {
-
+    const fanfic_id = this.props.fanficId
+    const id = this.props.chapterId
+    const title = this.newChapterTitle.value
+    const content = this.newChapterContent.state.value
+    const token = this.props.token
+    try {
+      Axios({
+        url: '/admin/chapter',
+        method: 'put',
+        data: {
+          title: title,
+          content: content,
+          fanfic_id: fanfic_id,
+          id: id
+        },
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            console.log(response.data)
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  deleteChapter() {
-
-  }
-
-  switchMode(id, mode) {
-    let fanfics = this.state.fanfics
-    for (let i = 0; i < fanfics.length; i++) {
-      if (fanfics[i].id === id) {
-        fanfics[i].mode = mode
-        this.setState({ fanfics: fanfics })
-      }
+  deleteChapter(id, token) {
+    try {
+      Axios({
+        url: '/admin/chapter',
+        method: 'delete',
+        data: {
+          id: id
+        },
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            window.location.reload()
+          }
+        })
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -100,22 +183,25 @@ export default class AdminFanficPage extends React.Component {
             <AdminHeader />
             <AdminSidebar />
             <AdminFanficEdit
-              fanfics={fanfics} fanficId={this.props.match.params.fanficId}
-              editFanfic={this.editFanfic} switchMode={this.switchMode} token={this.props.token}
+              fanfics={fanfics} fanficId={this.props.match.params.fanficId} hidden={this.state.editHidden.fanfic}
+              editFanfic={this.editFanfic} display={this.displayForm} token={this.props.token}
             />
-            <AdminChapterNew display={this.displayModal} postFunction={this.newFanfic} hidden={this.state.newChapterHidden} />
+            <AdminChapterNew
+              token={this.props.token} fanficId={this.props.match.params.fanficId} display={this.displayForm}
+              newChapter={this.newChapter} hidden={this.state.newHidden.chapter}
+            />
             <div>
               <Select
                 defaultValue={this.state.chapters.map((chapter, key) => {
                   if (selectedChapter == chapter.id) {
                     return (
-                      {value: chapter.id, label: chapter.title}
+                      { value: chapter.id, label: chapter.title }
                     )
                   }
                 })}
                 options={this.state.chapters.map((chapter, key) => {
                   return (
-                    {value: chapter.id, label: chapter.title}
+                    { value: chapter.id, label: chapter.title }
                   )
                 })}
                 onChange={this.selectChapter} />
@@ -125,7 +211,10 @@ export default class AdminFanficPage extends React.Component {
                 return (
                   <div key={key}>
                     <h1>{chapter.title}</h1>
-                    <AdminChapterEdit chapter={chapter} deleteChapter={this.deleteChapter} editChapter={this.editChapter} selectChapter={this.selectChapter} />
+                    <AdminChapterEdit
+                      token={this.props.token} chapter={chapter} deleteChapter={this.deleteChapter} editChapter={this.editChapter} fanficId={this.props.match.params.fanficId}
+                      selectChapter={this.selectChapter} display={this.displayForm} hidden={this.state.editHidden.chapter} chapterId={chapter.id}
+                    />
                   </div>
                 )
               }
