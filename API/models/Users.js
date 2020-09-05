@@ -53,35 +53,28 @@ async function registerUser(username, password, email) {
           message: "Username already taken"
         })
       } else {
-        const newUserCreds = {
-          username: username,
-          password: bcrypt.hashSync(password),
-          email: email
-        }
-        DB.query(`INSERT INTO users (username, password, email) values ('${newUserCreds.username}', '${newUserCreds.password}', '${newUserCreds.email}')`, (err, rows) => {
+        DB.query(`INSERT INTO users (username, password, email) values ('${username}', '${bcrypt.hashSync(password)}', '${email}')`, (err, rows) => {
           if (err) reject(err)
-          if (rows.affectedRows !== 0) {
-            newUserCreds.id = rows.insertId
-            DB.query(`INSERT INTO users_profiles (user_id) values ('${newUserCreds.id}')`, (err, rows) => {
+          if (rows) {
+            id = rows.insertId
+            DB.query(`INSERT INTO users_profiles (user_id) values ('${id}')`, (err, rows) => {
               if (err) reject(err)
               if (rows) {
-                if (rows.affectedRows !== 0) {
-                  resolve({
-                    success: true,
-                    message: "User successfully registered"
-                  })
-                } else {
-                  reject({
-                    success: false,
-                    message: "Error creating user, contact support for further assistance"
-                  })
-                }
+                resolve({
+                  success: true,
+                  message: "User successfully registered"
+                })
               } else {
                 reject({
                   success: false,
                   message: "Error creating user, contact support for further assistance"
                 })
               }
+            })
+          } else {
+            reject({
+              success: false,
+              message: "Error creating user, contact support for further assistance"
             })
           }
         })
@@ -95,11 +88,11 @@ async function registerUser(username, password, email) {
 
 async function loginUser(username, password) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`SELECT id, username, email, password FROM users WHERE username = '${username}'`, (err, rows) => {
+    DB.query(`SELECT id, username, email, password, role FROM users WHERE username = '${username}'`, (err, rows) => {
       if (rows[0] && password !== undefined) {
         if (err) reject(err)
         if (bcrypt.compareSync(password, rows[0].password)) {
-          jsonwebtoken.sign({ user: rows[0], role: "user" }, process.env.SECRET_TOKEN, { expiresIn: '10 m' }, (err, token) => {
+          jsonwebtoken.sign({ user: rows[0], role: rows[0].role }, process.env.SECRET_TOKEN, { expiresIn: '10 h' }, (err, token) => {
             if (err) reject(err)
             resolve({
               success: true,

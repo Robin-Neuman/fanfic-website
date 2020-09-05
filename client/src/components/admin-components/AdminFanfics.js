@@ -11,7 +11,7 @@ export default class AdminFanfics extends React.Component {
             return (
               <div className="fanficItem" key={key}>
                 <h1>{fanfic.title}</h1>                
-                <Link className="navBarItem" to={"/admin/adminPage/fanfics/edit/" + fanfic.id}><button>Edit</button></Link>
+                <Link className="navBarItem" to={"/adminPage/fanfics/edit/" + fanfic.id}><button>Edit</button></Link>
               </div>
             )
           }) : ( 

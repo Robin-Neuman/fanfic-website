@@ -5,6 +5,8 @@ import AdminChapterEdit from '../../components/admin-components/AdminChapterEdit
 import AdminFanficEdit from '../../components/admin-components/AdminFanficEdit'
 import Axios from 'axios'
 import Select from 'react-select'
+import AdminChapterNew from '../../components/admin-components/AdminChapterNew'
+import AdminFanficNew from '../../components/admin-components/AdminFanficNew'
 
 export default class AdminFanficPage extends React.Component {
   constructor(props) {
@@ -145,10 +147,12 @@ export default class AdminFanficPage extends React.Component {
           <div>
             <AdminHeader />
             <AdminSidebar />
+            <AdminFanficNew postFunction={this.newChapter} hidden={this.state.newFanficHidden} />
             <AdminFanficEdit
               fanfics={fanfics} fanficId={this.props.match.params.fanficId} deleteFanfic={this.deleteFanfic}
               editFanfic={this.editFanfic} switchMode={this.switchMode} token={this.props.token}
             />
+            <AdminChapterNew postFunction={this.newFanfic} hidden={this.state.newChapterHidden} />
             <div>
               <Select
                 defaultValue={this.state.chapters.map((chapter, key) => {

@@ -1,10 +1,5 @@
 const Admin = require('../models/Admin')
 
-async function loginAdmin(req, res) {
-  let token = await Admin.loginAdmin(req.body.username, req.body.password)
-  return res.json(token)
-}
-
 async function postFanfic(req, res) {
   let response = await Admin.postFanfic(req.body.title, req.body.summary)
   return res.json(response)
@@ -35,4 +30,4 @@ async function deleteChapter(req, res) {
   return res.json(response)
 }
 
-module.exports = { loginAdmin, postFanfic, editFanfic, deleteFanfic, postChapter,editChapter,deleteChapter }
+module.exports = { postFanfic, editFanfic, deleteFanfic, postChapter,editChapter,deleteChapter }

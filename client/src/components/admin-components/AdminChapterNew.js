@@ -6,11 +6,11 @@ export default class AdminChapterNew extends React.Component {
   render() {
     return (
       <div>
-        {!this.props.newFanficHidden ? (
+        {this.props.newFanficHidden == false ? (
           <div>
-            <form onSubmit={this.newFanfic}>
-              <input ref={(ref) => { this.fanficTitle = ref }} name="fanficTitle"></input>
-              <textarea ref={(ref) => { this.summary = ref }} name="summary"></textarea>
+            <form onSubmit={function () { this.props.postFunction.bind(this) }}>
+              <input ref={(ref) => { this.chapterTitle = ref }} name="chapterTitle"></input>
+              <textarea ref={(ref) => { this.body = ref }} name="body"></textarea>
             </form>
           </div>
         ) : (

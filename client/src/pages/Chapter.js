@@ -138,7 +138,7 @@ export default class Chapter extends React.Component {
     const chapter = this.state.chapter
     return (
       <div>
-        <Header loggedIn={this.props.loggedIn} />
+        <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         {chapter ?
           (
             <div className="chapter">

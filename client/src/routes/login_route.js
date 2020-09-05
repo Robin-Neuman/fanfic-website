@@ -8,10 +8,10 @@ const LoginRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        isLoggedIn(localStorage.getItem("token"), ["admin", "user"]) ? (
+        isLoggedIn(localStorage.getItem("token")) ? (
           <Redirect to={{ pathname: '/', state: { from: props.location } }} />
         ) : (
-          <Component {...props} handleLogin={rest.handleLogin} admin={false} />
+          <Component {...props} handleLogin={rest.handleLogin} />
         )
       }
     />

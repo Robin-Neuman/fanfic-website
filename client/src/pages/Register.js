@@ -7,20 +7,19 @@ export default class Register extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      redirect: false
+      redirect: false,
+      registerResponse: ""
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleRedirect() {
     if (this.state.redirect) {
-      return <Redirect to="/" />
+      return <Redirect to="/login" />
     }
   }
   handleSubmit(e) {
     e.preventDefault()
-    let formData = new FormData()
-    formData.set('username', 'password')
     Axios.post('/users',
       {
         username: this.username.value,
@@ -28,10 +27,15 @@ export default class Register extends React.Component {
         email: this.email.value
       })
       .then((response) => {
-        if (response.data === true) {
-          this.setState({ redirect: true })
+        if (response.data) {
+          if (response.data.success) {
+            this.setState({ redirect: true })
+          } else {            
+            console.log(response.data.message)
+            this.setState({ registerResponse: response.data.message })
+          }
         } else {
-          console.log(response.data)
+          console.log("Error making request")
         }
       })
 
@@ -41,9 +45,10 @@ export default class Register extends React.Component {
     return (
       <div>
         {this.handleRedirect()}
-        <Header loggedIn={this.props.loggedIn} />
+        <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         <form onSubmit={this.handleSubmit}>
           <h2>Register</h2>
+          <h3>{this.state.registerResponse}</h3>
           <label htmlFor="username">Username</label>
           <input ref={(ref) => { this.username = ref }} name="username" required></input>
           <label htmlFor="password">Password</label>
