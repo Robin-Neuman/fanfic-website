@@ -14,7 +14,7 @@ import Fanfic from './pages/Fanfic'
 import Chapter from './pages/Chapter'
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { isLoggedIn } from './helpers'
+import { isLoggedIn, getRole } from './helpers'
 
 import AdminRoute from './routes/admin_route'
 import LoginRoute from './routes/login_route'
@@ -53,7 +53,8 @@ export default class App extends React.Component {
       const fanfics = responses[2].data
       this.setState({
         users: users, news: news, fanfics: fanfics, loaded: true,
-        loggedIn: isLoggedIn(localStorage.getItem('token'))
+        loggedIn: isLoggedIn(localStorage.getItem('token')),
+        role: getRole(localStorage.getItem('token'))
       })
     }))
   }
@@ -86,7 +87,7 @@ export default class App extends React.Component {
             <AdminRoute exact path={"/adminPage"} component={Admin}
               handleLogout={this.handleLogout} />
             <AdminRoute exact path={"/adminPage/fanfics"} component={AdminFanfic}
-              handleLogout={this.handleLogout} fanfics={this.state.fanfics} />
+              handleLogout={this.handleLogout} fanfics={this.state.fanfics} token={this.state.token}/>
             <AdminRoute exact path={"/adminPage/fanfics/edit/:fanficId"} component={AdminFanficPage}
               handleLogout={this.handleLogout} fanfics={this.state.fanfics} token={this.state.token} />
           </BrowserRouter>

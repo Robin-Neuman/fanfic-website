@@ -3,6 +3,7 @@ const DB = require('./DB');
 // Fanfic functions
 async function postFanfic(title, summary) {
   const query = new Promise((resolve, reject) => {
+    console.log("Here")
     DB.query(`SELECT * FROM fanfics WHERE title = '${title}'`, (err, rows) => {
       if (rows[0]) {
         reject("Fanfic with that name already exists")

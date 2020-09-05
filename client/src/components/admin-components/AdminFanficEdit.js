@@ -25,8 +25,7 @@ export default class AdminFanficEdit extends React.Component {
                 ) : (
                     <div>
                       <h1>{fanfic.title}</h1>
-                      <p>{fanfic.summary}</p>
-                      <button onClick={() => deleteFanfic(fanfic.id, this.props.token)}>Delete</button>
+                      <p>{fanfic.summary}</p>                      
                       <button onClick={function (e) { e.preventDefault(); switchMode(fanfic.id, 'edit') }}>Edit</button>
                     </div>
                   )}
