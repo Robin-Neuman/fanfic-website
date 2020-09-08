@@ -9,7 +9,7 @@ async function getFanfics(limit) {
     DB.query(`SELECT * FROM fanfics LIMIT ${limit}`, (err, rows) => {
 
       let fanficsData = { fanfics: [] }
-//
+
       if (err) reject(err)
       rows.map((row) => {
         fanficsData.fanfics.push(
