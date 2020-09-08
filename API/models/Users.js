@@ -8,8 +8,6 @@ async function getUsers(limit) {
     DB.query(`SELECT username, id FROM users LIMIT ${limit}; SELECT * FROM users_relations LIMIT ${limit}; SELECT * FROM users_profiles LIMIT ${limit}`, (err, rows) => {
       var usersData = { users: [], usersRelations: [], usersProfiles: [] }
       if (err) reject(err)
-////////
-////////
       rows[0].map((row) => {
         usersData.users.push(
           {

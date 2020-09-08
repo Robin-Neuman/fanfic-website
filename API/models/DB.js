@@ -9,7 +9,7 @@ connection.getConnection(function connectDB(err) {
     return;
   }
   console.log('connected DB');
-//
+  
   connection.on('error', function errorDB(err) {
     if (err.code == 'PROTOCOL_CONNECTION_LOST') {
       handleConnection();
