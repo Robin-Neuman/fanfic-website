@@ -95,7 +95,7 @@ async function editChapter(title, content, fanfic_id, id) {
   })
   return await query
 }
-//
+////
 async function deleteChapter(id) {
   console.log(id)
   const query = new Promise((resolve, reject) => {
