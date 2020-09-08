@@ -6,12 +6,12 @@ export default class AdminSidebar extends React.Component {
     return (
       <div className="adminSidebar">
         <div className="sidebar">
-          <Link className="navBarItem" to={"/admin/adminPage"}>Dashboard</Link>          
-          <Link className="navBarItem" to={"/admin/adminPage/fanfics"}>Fanfics</Link>          
-          <Link className="navBarItem" to={"/admin/adminPage/gallery"}>Gallery</Link>          
-          <Link className="navBarItem" to={"/admin/adminPage/news"}>News</Link>          
-          <Link className="navBarItem" to={"/admin/adminPage/comments"}>Comments</Link>          
-          <Link className="navBarItem" to={"/admin/adminPage/requests"}>Requests</Link>          
+          <Link className="navBarItem" to={"/adminPage"}>Dashboard</Link>          
+          <Link className="navBarItem" to={"/adminPage/fanfics"}>Fanfics</Link>          
+          <Link className="navBarItem" to={"/adminPage/gallery"}>Gallery</Link>          
+          <Link className="navBarItem" to={"/adminPage/news"}>News</Link>          
+          <Link className="navBarItem" to={"adminPage/comments"}>Comments</Link>          
+          <Link className="navBarItem" to={"/adminPage/requests"}>Requests</Link>          
         </div>
       </div>
     )

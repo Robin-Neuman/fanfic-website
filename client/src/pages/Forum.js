@@ -6,7 +6,7 @@ export default class Forum extends React.Component {
     render() {
         return (
             <div>
-                <Header />
+                <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
                 <Footer />
             </div>
         )

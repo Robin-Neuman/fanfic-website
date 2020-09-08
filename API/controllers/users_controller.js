@@ -7,7 +7,7 @@ async function getUsers(req, res) {
 
 async function register(req, res) {
   let response = await Users.registerUser(req.body.username, req.body.password, req.body.email)
-  return res.send(response)
+  return res.json(response)
 }
 
 async function login(req, res) {

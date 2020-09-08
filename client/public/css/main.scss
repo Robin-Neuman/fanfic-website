@@ -13,6 +13,7 @@ body {
     margin: 0;
     padding: 0;
     .navBarItem {
+        font-size: 16px;
         padding: 14px 16px;
         margin: 0px 10px 0px 10px;
         text-decoration: none;
@@ -26,6 +27,24 @@ body {
         color: #FFFFFF;
         font-size: 26px;
         margin: 0px 20px 0px 20px;
+    }
+    button {
+        padding: 14px 16px;
+        justify-content: flex-end;
+        border: none;
+        margin: 0;
+        font-size: 16px;
+        text-decoration: none;
+        background: #2D3C5C;
+        color: #E5DCDD;
+        cursor: pointer;
+        text-align: center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        &:hover {
+            color: white;
+            background: #4D9AAD;
+        }
     }
 }
 

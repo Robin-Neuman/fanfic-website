@@ -31,7 +31,7 @@ export default class Fanfic extends React.Component {
   render() {
     return (
       <div>       
-        <Header />
+        <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         {this.state.loaded ? this.state.chapters.chapters.map((chapter, key) => {
           return (
             <div className="chapterItem" key={key}>

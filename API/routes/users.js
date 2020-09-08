@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const users_controller = require('../controllers/users_controller');
-const authenticateToken = require('../public/functions/authenticate');
 require('dotenv').config();
 
 router.get('/', users_controller.getUsers)

@@ -11,26 +11,33 @@ export default class Chapter extends React.Component {
     this.state = {
       loaded: false,
       chapter: this.props.location.state.chapter,
-      token: localStorage.getItem('token')
+      token: this.props.token,
+      loggedIn: this.props.loggedIn
     }
     this.fetchComments = this.fetchComments.bind(this)
-    this.editComment = this.editComment.bind(this)
+    this.switchMode = this.switchMode.bind(this)
   }
 
   fetchComments(id, chapter) {
-    Axios.get(`/content/comments/${id}`)
+    try {
+      Axios.get(`/content/comments/${id}`)
       .then((response) => {
-        if (response.data) {
+        if (response.data !== undefined && response.data !== null) {
           chapter.comments = response.data.comments
           this.setState({ chapter: chapter })
         }
       })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   postComment(e) {
-    const decoded = this.props.decoded
     e.preventDefault()
-    Axios.post('/content/comment',
+    const token = this.props.token
+    try {      
+      const decoded = jwt_decode(token)
+      Axios.post('/content/comment',
       {
         title: this.title.value,
         content: this.content.value,
@@ -43,35 +50,42 @@ export default class Chapter extends React.Component {
       }
     )
       .then((response) => {
-        if (response.data) {
+        if (response.data !== undefined && response.data !== null) {
           this.resetFields()
           this.props.fetchComments(this.props.chapterId, this.props.chapter)
         }
       })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   deleteComment(comment_id, chapterId, chapter, token, fetchComments) {
-    Axios({
-      url: '/content/comment',
-      method: 'delete',
-      data: {
-        comment_id: comment_id
-      },
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then((response) => {
-        if (response.data) {
-          console.log(response.data)
-          fetchComments(chapterId, chapter)
-        }
+    try {
+      Axios({
+        url: '/content/comment',
+        method: 'delete',
+        data: {
+          comment_id: comment_id
+        },
+        headers: { Authorization: `Bearer ${token}` }
       })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            console.log(response.data)
+            fetchComments(chapterId, chapter)
+          }
+        })
+    } catch (error) {
+      console.log(error)
+    }        
   }
 
-  editComment(id, edit_mode) {
+  switchMode(id, mode) {
     let chapter = this.state.chapter
     for (let i = 0; i < chapter.comments.length; i++) {
-      if (chapter.comments[i].id == id) {
-        chapter.comments[i].edit_mode = edit_mode
+      if (chapter.comments[i].id === id) {
+        chapter.comments[i].mode = mode
         this.setState({ chapter: chapter })
       }
     }
@@ -86,29 +100,33 @@ export default class Chapter extends React.Component {
     const chapter = this.props.chapter
     const token = this.props.token
     const fetchComments = this.props.fetchComments
-    for (let i = 0; i < chapter.comments.length; i++) {
-      if (chapter.comments[i].id == comment_id) {
-        if (chapter.comments[i].title == title && chapter.comments[i].content == content) {
-          return false
-        } else {
-          Axios({
-            url: '/content/comment',
-            method: 'put',
-            data: {
-              title: title,
-              content: content,
-              comment_id: comment_id
-            },
-            headers: { Authorization: `Bearer ${token}` }
-          })
-            .then((response) => {
-              if (response.data) {
-                console.log(response.data)
-                fetchComments(chapterId, chapter)
-              }
+    try {
+      for (let i = 0; i < chapter.comments.length; i++) {
+        if (chapter.comments[i].id == comment_id) {
+          if (chapter.comments[i].title === title && chapter.comments[i].content === content) {
+            return false
+          } else {
+            Axios({
+              url: '/content/comment',
+              method: 'put',
+              data: {
+                title: title,
+                content: content,
+                comment_id: comment_id
+              },
+              headers: { Authorization: `Bearer ${token}` }
             })
+              .then((response) => {
+                if (response.data !== undefined && response.data !== null) {
+                  console.log(response.data)
+                  fetchComments(chapterId, chapter)
+                }
+              })
+          }
         }
       }
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -120,7 +138,7 @@ export default class Chapter extends React.Component {
     const chapter = this.state.chapter
     return (
       <div>
-        <Header />
+        <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         {chapter ?
           (
             <div className="chapter">
@@ -130,10 +148,10 @@ export default class Chapter extends React.Component {
           ) : (
             <div className="chapter" />
           )}
-        <Comments decoded={jwt_decode(this.state.token)} token={this.state.token} chapterId={this.props.match.params.chapterId}
+        <Comments token={this.state.token} chapterId={this.props.match.params.chapterId}
           fanficId={this.props.match.params.fanficId} chapter={this.state.chapter} resetFields={this.resetFields}
-          postComment={this.postComment} submitEdit={this.submitEdit} editComment={this.editComment} deleteComment={this.deleteComment}
-          fetchComments={this.fetchComments} users={this.props.users} />
+          postComment={this.postComment} submitEdit={this.submitEdit} switchMode={this.switchMode} deleteComment={this.deleteComment}
+          fetchComments={this.fetchComments} users={this.props.users} loggedIn={this.state.loggedIn} />
         <Footer />
       </div>
     )

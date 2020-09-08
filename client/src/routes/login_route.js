@@ -2,20 +2,20 @@ import React from 'react'
 import { isLoggedIn } from '../helpers'
 import { Redirect, Route } from 'react-router-dom'
 
-const AdminRoute = ({ component: Component, ...rest }) => {
-  console.log(rest)
+const LoginRoute = ({ component: Component, ...rest }) => {
+
   return (
     <Route
       {...rest}
       render={props =>
-        isLoggedIn(localStorage.getItem("token"), ["admin"]) ? (
-          <Component {...props} fanfics={rest.fanfics} token={rest.token} />
-        ) : (
+        isLoggedIn(localStorage.getItem("token")) ? (
           <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+        ) : (
+          <Component {...props} handleLogin={rest.handleLogin} />
         )
       }
     />
   )
 }
 
-export default AdminRoute
+export default LoginRoute

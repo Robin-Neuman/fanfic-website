@@ -7,26 +7,24 @@ const DB = require('./DB');
 async function getFanfics(limit) {
   const query = new Promise((resolve, reject) => {
     DB.query(`SELECT * FROM fanfics LIMIT ${limit}`, (err, rows) => {
-    
+
       let fanficsData = { fanfics: [] }
-    
-      if (err) {
-        reject(err);
-      } else {
-        rows.map((row) => {
-          fanficsData.fanfics.push(
-            {
-              id: row.id,
-              title: row.title,
-              summary: row.summary
-            }
-          );
-        })
-      }
+
+      if (err) reject(err)
+      rows.map((row) => {
+        fanficsData.fanfics.push(
+          {
+            id: row.id,
+            title: row.title,
+            summary: row.summary,
+            mode: 'view'
+          }
+        );
+      })
       resolve(fanficsData)
     })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
@@ -46,7 +44,8 @@ async function getChapters(id) {
               id: chapter.id,
               fanfic_id: chapter.fanfic_id,
               title: chapter.title,
-              content: chapter.chapter_content
+              content: chapter.chapter_content,
+              mode: 'view'
             }
           );
         })
@@ -54,7 +53,7 @@ async function getChapters(id) {
       resolve(chaptersData)
     })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
@@ -67,27 +66,27 @@ async function getComments(id) {
       if (err) {
         reject(err);
       } else {
-          rows.map((comment) => {
-            let date = moment(comment.created).format('Do MMMM YYYY')
-            commentsData.comments.push(
-              {
-                id: comment.id,
-                fanfic_id: comment.fanfic_id,
-                chapter_id: comment.chapter_id,
-                user_id: comment.user_id,
-                title: comment.comment_title,
-                content: comment.comment_content,
-                img_link: comment.img_link,
-                created: date,
-                edit_mode: false
-              }
-            );
-          })
-        }
+        rows.map((comment) => {
+          let date = moment(comment.created).format('Do MMMM YYYY')
+          commentsData.comments.push(
+            {
+              id: comment.id,
+              fanfic_id: comment.fanfic_id,
+              chapter_id: comment.chapter_id,
+              user_id: comment.user_id,
+              title: comment.comment_title,
+              content: comment.comment_content,
+              img_link: comment.img_link,
+              created: date,
+              mode: 'view'
+            }
+          );
+        })
+      }
       resolve(commentsData)
     })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
@@ -118,7 +117,7 @@ async function getNews() {
       resolve(newsArr)
     })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
@@ -127,16 +126,16 @@ async function getNews() {
 async function postComment(fanfic_id, chapter_id, title, content, user_id) {
   const query = new Promise((resolve, reject) => {
     DB.query(`INSERT INTO chapters_comments (fanfic_id, chapter_id, comment_title, comment_content, user_id) 
-                values ('${fanfic_id}', '${chapter_id}', '${title}', '${content}', '${user_id}')`, 
-    (err, rows) => {  
-      if (err) {
-        reject(err)
-      } else {
-        resolve(true)
-      }
-    })
+                values ('${fanfic_id}', '${chapter_id}', '${title}', '${content}', '${user_id}')`,
+      (err, rows) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(rows[0])
+        }
+      })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
@@ -144,30 +143,30 @@ async function postComment(fanfic_id, chapter_id, title, content, user_id) {
 // Delete comment on fanfic chapter
 async function deleteComment(id) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`DELETE FROM chapters_comments WHERE id = '${id}'`, (err, rows) => {  
+    DB.query(`DELETE FROM chapters_comments WHERE id = '${id}'`, (err, rows) => {
       if (err) {
         reject(err)
       } else {
-        resolve(true)
+        resolve(rows[0])
       }
     })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
 
 async function editComment(title, content, id) {
   const query = new Promise((resolve, reject) => {
-    DB.query(`UPDATE chapters_comments SET comment_title = '${title}', comment_content = '${content}' WHERE id = '${id}'`, (err, rows) => {  
+    DB.query(`UPDATE chapters_comments SET comment_title = '${title}', comment_content = '${content}' WHERE id = '${id}'`, (err, rows) => {
       if (err) {
         reject(err)
       } else {
-        resolve(true)
+        resolve(rows[0])
       }
     })
   }).catch((error) => {
-    return(error)
+    return (error)
   })
   return await query
 }
