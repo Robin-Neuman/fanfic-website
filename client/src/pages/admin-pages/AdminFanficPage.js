@@ -33,7 +33,11 @@ export default class AdminFanficPage extends React.Component {
       Axios.get(`/content/chapters/${this.props.match.params.fanficId}`)
         .then((response) => {
           if (response.data) {
-            this.setState({ loaded: true, chapters: response.data.chapters, selectedChapter: response.data.chapters[0].id })
+            let selected = 0
+            if (response.data.chapters[0]) {
+              selected = response.data.chapters[0].id
+            }
+            this.setState({ loaded: true, chapters: response.data.chapters, selectedChapter: selected })
           }
         })
     }
