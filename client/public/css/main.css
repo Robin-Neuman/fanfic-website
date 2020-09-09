@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #fffdf7;
 }
 
 .navBar, .adminHeader {
@@ -19,27 +20,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navBar .navBarItem, .adminHeader .navBarItem {
-  font-size: 16px;
-  padding: 14px 16px;
-  margin: 0px 10px 0px 10px;
-  text-decoration: none;
-  color: #E5DCDD;
-}
-
-.navBar .navBarItem:hover, .adminHeader .navBarItem:hover {
-  color: white;
-  background-color: #4D9AAD;
-}
-
-.navBar .navBarHeader, .adminHeader .navBarHeader {
-  color: #FFFFFF;
-  font-size: 26px;
-  margin: 0px 20px 0px 20px;
 }
 
 .navBar button, .adminHeader button {
@@ -60,6 +40,73 @@ body {
 }
 
 .navBar button:hover, .adminHeader button:hover {
+  color: white;
+  background: #4D9AAD;
+}
+
+.navBar .dropdownButton, .adminHeader .dropdownButton {
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.navBar .links .navBarItem, .adminHeader .links .navBarItem {
+  font-size: 16px;
+  padding: 14px 16px;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.navBar .links .navBarItem:hover, .adminHeader .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.navBar .navBarHeader, .adminHeader .navBarHeader {
+  color: #FFFFFF;
+  font-size: 26px;
+  margin: 0px 20px 0px 20px;
+}
+
+.dropdownMenu {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  right: 24px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #3e527c;
+}
+
+.dropdownMenu .dropdownItem {
+  font-size: 16px;
+  padding: 14px 16px;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.dropdownMenu .dropdownItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.dropdownMenu button {
+  padding: 14px 16px;
+  border: none;
+  font-size: 16px;
+  text-decoration: none;
+  background: #2D3C5C;
+  color: #E5DCDD;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.dropdownMenu button:hover {
   color: white;
   background: #4D9AAD;
 }
