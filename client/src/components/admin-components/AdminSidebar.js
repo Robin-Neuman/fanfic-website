@@ -5,7 +5,7 @@ export default class AdminSidebar extends React.Component {
   render() {
     return (
       <div className="adminSidebar">
-        <div className="sidebar">
+        <div className="links">
           <Link className="navBarItem" to={"/adminPage"}>Dashboard</Link>          
           <Link className="navBarItem" to={"/adminPage/fanfics"}>Fanfics</Link>          
           <Link className="navBarItem" to={"/adminPage/gallery"}>Gallery</Link>          

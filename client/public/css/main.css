@@ -4,7 +4,7 @@ body {
   background-color: #fffdf7;
 }
 
-.navBar, .adminHeader {
+.navBar {
   background-color: #2D3C5C;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -22,13 +22,12 @@ body {
   list-style-type: none;
 }
 
-.navBar button, .adminHeader button {
+.navBar button {
   padding: 14px 16px;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
   border: none;
-  margin: 0;
   font-size: 16px;
   text-decoration: none;
   background: #2D3C5C;
@@ -39,66 +38,140 @@ body {
   -moz-appearance: none;
 }
 
-.navBar button:hover, .adminHeader button:hover {
+.navBar button:hover {
   color: white;
   background: #4D9AAD;
 }
 
-.navBar .dropdownButton, .adminHeader .dropdownButton {
+.navBar .dropdownButton {
   margin-left: auto;
   margin-right: 24px;
 }
 
-.navBar .links .navBarItem, .adminHeader .links .navBarItem {
-  font-size: 16px;
+.navBar .links {
   padding: 14px 16px;
+}
+
+.navBar .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
   margin: 0px 10px 0px 10px;
   text-decoration: none;
   color: #E5DCDD;
 }
 
-.navBar .links .navBarItem:hover, .adminHeader .links .navBarItem:hover {
+.navBar .links .navBarItem:hover {
   color: white;
   background-color: #4D9AAD;
 }
 
-.navBar .navBarHeader, .adminHeader .navBarHeader {
+.navBar .navBarHeader {
   color: #FFFFFF;
   font-size: 26px;
   margin: 0px 20px 0px 20px;
 }
 
-.dropdownMenu {
-  -webkit-box-orient: vertical;
+.adminHeader {
+  background-color: #2D3C5C;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  position: fixed;
-  right: 24px;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #3e527c;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style-type: none;
 }
 
-.dropdownMenu .dropdownItem {
-  font-size: 16px;
-  padding: 14px 16px;
-  margin: 0px 10px 0px 10px;
-  text-decoration: none;
-  color: #E5DCDD;
-}
-
-.dropdownMenu .dropdownItem:hover {
-  color: white;
-  background-color: #4D9AAD;
-}
-
-.dropdownMenu button {
+.adminHeader button {
   padding: 14px 16px;
   border: none;
   font-size: 16px;
   text-decoration: none;
   background: #2D3C5C;
+  color: #E5DCDD;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.adminHeader button:hover {
+  color: white;
+  background: #4D9AAD;
+}
+
+.adminHeader .links {
+  padding: 14px 0px;
+}
+
+.adminHeader .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
+  margin: 0px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.adminHeader .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.adminCont {
+  margin-left: 120px;
+}
+
+.dropdownMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  text-align: center;
+  width: 80px;
+  right: 24px;
+  padding: 16px 16px;
+  border-radius: 5px;
+  background-color: #3e527c;
+}
+
+.dropdownMenu .dropdownItem {
+  border-radius: 5px;
+  padding: 14px 16px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.dropdownMenu .dropdownItem:hover {
+  border-radius: 5px;
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.dropdownMenu button {
+  border-radius: 5px;
+  padding: 14px 16px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border: none;
+  font-size: 16px;
+  text-decoration: none;
+  background: #3e527c;
   color: #E5DCDD;
   cursor: pointer;
   text-align: center;
@@ -107,8 +180,51 @@ body {
 }
 
 .dropdownMenu button:hover {
+  border-radius: 5px;
   color: white;
   background: #4D9AAD;
+}
+
+.adminSidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  text-align: center;
+  word-wrap: break-word;
+  height: 100%;
+  min-width: 120px;
+  left: 0px;
+  background-color: #3e527c;
+}
+
+.adminSidebar .links {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.adminSidebar .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.adminSidebar .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
 }
 
 .pageTitle {

@@ -10,6 +10,12 @@ export default class Navbar extends React.Component {
             navOpen: false
         }
     }
+
+    toggleNav() {
+        const navOpen = this.state.navOpen
+        this.setState({ navOpen: !navOpen })
+    }
+
     render() {
         const navOpen = this.state.navOpen
         return (
@@ -36,19 +42,16 @@ export default class Navbar extends React.Component {
                     </div>
                     {this.props.loggedIn ? (
                         <div className="dropdownButton">
-                            <button onClick={() => { this.setState({ navOpen: !navOpen }) }}>Click</button>
+                            <button onClick={() => { this.toggleNav() }}>Dropdown</button>
                         </div>
                     ) : (
                             <div />
                         )}
                 </div>
-                {navOpen ? (
+                {navOpen && this.props.loggedIn ? (
                     <div className="dropdownMenu">                 
-                        <Link className="dropdownItem" to={"/"}>Profile</Link>   
-                        <Link className="dropdownItem" to={"/"}>Profile</Link>   
-                        <Link className="dropdownItem" to={"/"}>Profile</Link>   
-                        <Link className="dropdownItem" to={"/"}>Profile</Link>   
-                        <Link className="dropdownItem" to={"/"}>Profile</Link>   
+                        <Link className="dropdownItem" to={"/"}>Profile</Link> 
+                        <Logout handleLogout={this.props.handleLogout} />
                     </div>
                 ) : (
                         <div hidden />

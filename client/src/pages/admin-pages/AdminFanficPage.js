@@ -186,6 +186,7 @@ export default class AdminFanficPage extends React.Component {
           <div>
             <AdminHeader />
             <AdminSidebar />
+            <div className="adminCont">
             <AdminFanficEdit
               fanfics={fanfics} fanficId={this.props.match.params.fanficId} hidden={this.state.editHidden.fanfic}
               editFanfic={this.editFanfic} display={this.displayForm} token={this.props.token}
@@ -223,10 +224,12 @@ export default class AdminFanficPage extends React.Component {
                 )
               }
             })}
+            </div>
           </div>
         ) : (
             <div />
           )}
+          
       </div>
     )
   }

@@ -5,7 +5,10 @@ export default class AdminHeader extends React.Component {
   render() {
     return (
       <div className="adminHeader">        
-        <Link className="navBarItem" to={"/adminPage"}>Admin</Link>
+        <div className="links">
+          <Link className="navBarItem" to={"/adminPage"}>Admin</Link>
+          <Link className="navBarItem" to={"/"}>Home</Link>
+        </div>
       </div>
     )
   }

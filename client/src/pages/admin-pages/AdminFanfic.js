@@ -38,8 +38,8 @@ export default class AdminFanfic extends React.Component {
     } catch (error) {
       console.log(error)
     }
-  }  
-  
+  }
+
   deleteFanfic(id, token) {
     try {
       Axios({
@@ -59,9 +59,9 @@ export default class AdminFanfic extends React.Component {
       console.log(error)
     }
   }
-  
+
   displayFanfic(mode) {
-      this.setState({ newHidden: mode })
+    this.setState({ newHidden: mode })
   }
 
   render() {
@@ -70,9 +70,11 @@ export default class AdminFanfic extends React.Component {
       <div>
         <AdminHeader />
         <AdminSidebar />
-        <AdminFanficNew token={this.props.token} display={this.displayFanfic} postFunction={this.newFanfic} hidden={this.state.newHidden} />
-        <AdminFanfics token={this.props.token} fanfics={this.state.fanfics} deleteFanfic={this.deleteFanfic} />
-      </div> 
-    ) 
-  } 
+        <div className="adminCont">
+          <AdminFanficNew token={this.props.token} display={this.displayFanfic} postFunction={this.newFanfic} hidden={this.state.newHidden} />
+          <AdminFanfics token={this.props.token} fanfics={this.state.fanfics} deleteFanfic={this.deleteFanfic} />
+        </div>
+      </div>
+    )
+  }
 }   

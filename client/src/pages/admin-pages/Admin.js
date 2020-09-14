@@ -9,7 +9,9 @@ export default class Admin extends React.Component {
             <div>
                 <AdminHeader />
                 <AdminSidebar />
-                <AdminDash />
+                <div className="adminCont">
+                    <AdminDash />
+                </div>
             </div>
         )
     }
