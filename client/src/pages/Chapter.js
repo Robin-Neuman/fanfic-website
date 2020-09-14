@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import Sidebar from '../components/Sidebar'
 import Axios from 'axios'
 import Comments from '../components/Comments'
 import jwt_decode from 'jwt-decode'
@@ -21,12 +22,12 @@ export default class Chapter extends React.Component {
   fetchComments(id, chapter) {
     try {
       Axios.get(`/content/comments/${id}`)
-      .then((response) => {
-        if (response.data !== undefined && response.data !== null) {
-          chapter.comments = response.data.comments
-          this.setState({ chapter: chapter })
-        }
-      })
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            chapter.comments = response.data.comments
+            this.setState({ chapter: chapter })
+          }
+        })
     } catch (error) {
       console.log(error)
     }
@@ -35,26 +36,26 @@ export default class Chapter extends React.Component {
   postComment(e) {
     e.preventDefault()
     const token = this.props.token
-    try {      
+    try {
       const decoded = jwt_decode(token)
       Axios.post('/content/comment',
-      {
-        title: this.title.value,
-        content: this.content.value,
-        user_id: decoded.user.id,
-        fanfic_id: this.props.fanficId,
-        chapter_id: this.props.chapterId
-      },
-      {
-        headers: { Authorization: `Bearer ${this.props.token}` }
-      }
-    )
-      .then((response) => {
-        if (response.data !== undefined && response.data !== null) {
-          this.resetFields()
-          this.props.fetchComments(this.props.chapterId, this.props.chapter)
+        {
+          title: this.title.value,
+          content: this.content.value,
+          user_id: decoded.user.id,
+          fanfic_id: this.props.fanficId,
+          chapter_id: this.props.chapterId
+        },
+        {
+          headers: { Authorization: `Bearer ${this.props.token}` }
         }
-      })
+      )
+        .then((response) => {
+          if (response.data !== undefined && response.data !== null) {
+            this.resetFields()
+            this.props.fetchComments(this.props.chapterId, this.props.chapter)
+          }
+        })
     } catch (error) {
       console.log(error)
     }
@@ -78,7 +79,7 @@ export default class Chapter extends React.Component {
         })
     } catch (error) {
       console.log(error)
-    }        
+    }
   }
 
   switchMode(id, mode) {
@@ -139,19 +140,22 @@ export default class Chapter extends React.Component {
     return (
       <div>
         <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
-        {chapter ?
-          (
-            <div className="chapter">
-              <h1>{chapter.title}</h1>
-              <p>{chapter.content}</p>
-            </div>
-          ) : (
-            <div className="chapter" />
-          )}
-        <Comments token={this.state.token} chapterId={this.props.match.params.chapterId}
-          fanficId={this.props.match.params.fanficId} chapter={this.state.chapter} resetFields={this.resetFields}
-          postComment={this.postComment} submitEdit={this.submitEdit} switchMode={this.switchMode} deleteComment={this.deleteComment}
-          fetchComments={this.fetchComments} users={this.props.users} loggedIn={this.state.loggedIn} />
+        <Sidebar handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
+        <div className="mainCont">
+          {chapter ?
+            (
+              <div className="chapter">
+                <h1>{chapter.title}</h1>
+                <p>{chapter.content}</p>
+              </div>
+            ) : (
+              <div className="chapter" />
+            )}
+          <Comments token={this.state.token} chapterId={this.props.match.params.chapterId}
+            fanficId={this.props.match.params.fanficId} chapter={this.state.chapter} resetFields={this.resetFields}
+            postComment={this.postComment} submitEdit={this.submitEdit} switchMode={this.switchMode} deleteComment={this.deleteComment}
+            fetchComments={this.fetchComments} users={this.props.users} loggedIn={this.state.loggedIn} />
+        </div>
         <Footer />
       </div>
     )

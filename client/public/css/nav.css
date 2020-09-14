@@ -1,0 +1,279 @@
+.dropdownMenu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  text-align: center;
+  width: 80px;
+  right: 24px;
+  padding: 16px 16px;
+  border-radius: 5px;
+  background-color: #3e527c;
+}
+
+.dropdownMenu .dropdownItem {
+  border-radius: 5px;
+  padding: 14px 16px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.dropdownMenu .dropdownItem:hover {
+  border-radius: 5px;
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.dropdownMenu button {
+  border-radius: 5px;
+  padding: 14px 16px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border: none;
+  font-size: 16px;
+  text-decoration: none;
+  background: #3e527c;
+  color: #E5DCDD;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.dropdownMenu button:hover {
+  border-radius: 5px;
+  color: white;
+  background: #4D9AAD;
+}
+
+.adminSidebar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  text-align: center;
+  word-wrap: break-word;
+  height: 100%;
+  min-width: 120px;
+  left: 0px;
+  background-color: #3e527c;
+}
+
+.adminSidebar .links {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.adminSidebar .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.adminSidebar .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.navBar {
+  background-color: #2D3C5C;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style-type: none;
+}
+
+.navBar button {
+  padding: 14px 16px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border: none;
+  font-size: 16px;
+  text-decoration: none;
+  background: #2D3C5C;
+  color: #E5DCDD;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.navBar button:hover {
+  color: white;
+  background: #4D9AAD;
+}
+
+.navBar .dropdownButton {
+  margin-left: auto;
+  margin-right: 24px;
+}
+
+.navBar .links {
+  padding: 14px 16px;
+}
+
+.navBar .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
+  margin: 0px 10px 0px 10px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.navBar .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.navBar .navBarHeader {
+  color: #FFFFFF;
+  font-size: 26px;
+  margin: 0px 20px 0px 20px;
+}
+
+.adminHeader {
+  background-color: #2D3C5C;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style-type: none;
+}
+
+.adminHeader button {
+  padding: 14px 16px;
+  border: none;
+  font-size: 16px;
+  text-decoration: none;
+  background: #2D3C5C;
+  color: #E5DCDD;
+  cursor: pointer;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.adminHeader button:hover {
+  color: white;
+  background: #4D9AAD;
+}
+
+.adminHeader .links {
+  padding: 14px 0px;
+}
+
+.adminHeader .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
+  margin: 0px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.adminHeader .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+.sidebar {
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  text-align: center;
+  word-wrap: break-word;
+  height: 100%;
+  min-width: 120px;
+  top: 46.29px;
+  left: 0;
+  background-color: #3e527c;
+}
+
+.sidebar .links {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #3e527c;
+}
+
+.sidebar .links .navBarItem {
+  padding: 14px 16px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #E5DCDD;
+}
+
+.sidebar .links .navBarItem:hover {
+  color: white;
+  background-color: #4D9AAD;
+}
+
+@media only screen and (max-width: 992px) {
+  .mainCont {
+    margin-left: 120px;
+  }
+  .navBar .links {
+    display: none;
+  }
+  .sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+/*# sourceMappingURL=nav.css.map */

@@ -2,6 +2,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import Axios from 'axios'
 import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
 import { getRole } from '../helpers'
 
 export default class Login extends React.Component {
@@ -51,15 +52,18 @@ export default class Login extends React.Component {
       <div>
         {this.handleRedirect()}
         <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
-        <form onSubmit={this.handleSubmit}>
-          <h2>Login</h2>
-          <h3>{this.state.loginResponse}</h3>
-          <label htmlFor="username">Username</label>
-          <input ref={(ref) => { this.username = ref }} name="username" required></input>
-          <label htmlFor="password">Password</label>
-          <input ref={(ref) => { this.password = ref }} name="password" type="password" required></input>
-          <button type="submit">Submit</button>
-        </form>
+        <Sidebar handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
+        <div className="mainCont">
+          <form onSubmit={this.handleSubmit}>
+            <h2>Login</h2>
+            <h3>{this.state.loginResponse}</h3>
+            <label htmlFor="username">Username</label>
+            <input ref={(ref) => { this.username = ref }} name="username" required></input>
+            <label htmlFor="password">Password</label>
+            <input ref={(ref) => { this.password = ref }} name="password" type="password" required></input>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     )
   }
