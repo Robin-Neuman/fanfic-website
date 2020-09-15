@@ -145,8 +145,8 @@ export default class Chapter extends React.Component {
           {chapter ?
             (
               <div className="chapter">
-                <h1>{chapter.title}</h1>
-                <p>{chapter.content}</p>
+                <h1 className="chapterTitle">{chapter.title}</h1>
+                <p className="contentBody" dangerouslySetInnerHTML={{__html: chapter.content}}></p>
               </div>
             ) : (
               <div className="chapter" />
@@ -161,3 +161,6 @@ export default class Chapter extends React.Component {
     )
   }
 }
+
+// <p dangerouslySetInnerHTML={{__html: chapter.content}}></p>
+// <iframe src='https://view.officeapps.live.com/op/embed.aspx?src=http://remote.url.tld/path/to/document.doc' width='1366px' height='623px' frameborder='0'>This is an embedded <a target='_blank' href='http://office.com'>Microsoft Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office Online</a>.</iframe>

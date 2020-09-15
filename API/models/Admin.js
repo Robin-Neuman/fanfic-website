@@ -1,5 +1,4 @@
 const DB = require('./DB');
-
 // Fanfic functions
 async function postFanfic(title, summary) {
   const query = new Promise((resolve, reject) => {
@@ -81,10 +80,11 @@ async function postChapter(title, content, id) {
 }
 
 async function editChapter(title, content, fanfic_id, id) {
-  console.log(title, content, fanfic_id, id)
+  let parsedContent = content.replace(/'/g, "’")
   const query = new Promise((resolve, reject) => {
-    DB.query(`UPDATE fanfics_chapters SET title = '${title}', chapter_content = '${content}', fanfic_id = '${fanfic_id}' WHERE id = '${id}'`, (err, rows) => {
+    DB.query(`UPDATE fanfics_chapters SET title = '${title}', chapter_content = '${parsedContent}', fanfic_id = '${fanfic_id}' WHERE id = '${id}'`, (err, rows) => {
       if (err) {
+        console.log(err)
         reject(err)
       } else {
         resolve(rows[0])

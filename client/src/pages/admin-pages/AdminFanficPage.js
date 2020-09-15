@@ -91,6 +91,7 @@ export default class AdminFanficPage extends React.Component {
           if (response.data !== undefined && response.data !== null) {
             console.log(response.data)
           }
+          console.log(response)
         })
     } catch (error) {
       console.log(error)

@@ -11,8 +11,9 @@
       -ms-flex-align: stretch;
           align-items: stretch;
   text-align: center;
-  width: 80px;
+  width: 73px;
   right: 24px;
+  top: 46.29px;
   padding: 16px 16px;
   border-radius: 5px;
   background-color: #3e527c;
@@ -34,7 +35,7 @@
 
 .dropdownMenu button {
   border-radius: 5px;
-  padding: 14px 16px;
+  padding: 14px 12px;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
@@ -71,7 +72,7 @@
   word-wrap: break-word;
   height: 100%;
   min-width: 120px;
-  left: 0px;
+  top: 46.29px;
   background-color: #3e527c;
 }
 
@@ -106,6 +107,7 @@
   left: 0;
   top: 0;
   width: 100%;
+  z-index: 10;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -169,7 +171,12 @@
 }
 
 .adminHeader {
+  z-index: 10;
   background-color: #2D3C5C;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
