@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router'
 import { BrowserRouter } from 'react-router-dom'
-import axios from 'axios'
+import Axios from 'axios'
 
 import Home from './pages/Home'
 import FanficPage from './pages/Fanfics'
@@ -35,7 +35,6 @@ export default class App extends React.Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
-
   handleLogout() {
     localStorage.removeItem('token')
     this.setState({ loggedIn: false, token: "" })
@@ -47,7 +46,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     //localStorage.removeItem('token')
-    axios.all([axios.get('/users'), axios.get('/content/news'), axios.get('/content/fanfics')]).then(axios.spread((...responses) => {
+    Axios.all([Axios.get('/users'), Axios.get('/content/news'), Axios.get('/content/fanfics')]).then(Axios.spread((...responses) => {
       const users = responses[0].data
       const news = responses[1].data
       const fanfics = responses[2].data
@@ -60,6 +59,8 @@ export default class App extends React.Component {
   }
 
   render() {
+    
+  console.log("reloaded")
     return (
       <React.Fragment>
         {this.state.loaded ? (

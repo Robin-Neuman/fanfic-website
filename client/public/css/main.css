@@ -4,16 +4,77 @@ body {
   background-color: #fffdf7;
 }
 
+.lds-ring {
+  display: inline-block;
+  position: fixed;
+  top: 45px;
+  left: 0px;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #4D9AAD;
+  border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #4D9AAD transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+
+@-webkit-keyframes lds-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .adminCont {
   margin: 46.29px 0px 0px 120px;
 }
 
-.pageTitle {
-  margin: 20px;
+.commentField {
+  margin: 0px 0px 0px 30px;
 }
 
 .chapter {
-  margin: 100px;
+  margin: 150px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -52,18 +113,17 @@ body {
   word-wrap: break-word;
   white-space: pre-wrap;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1000px;
 }
 
 .chapter .contentBody ul {
+  max-width: 1000px;
   padding: 5px 5px;
-  width: 60%;
-  margin: 0 0 0 100px;
+  width: 95%;
   list-style-type: none;
 }
 
 .chapter .contentBody ul li:before {
-  margin: 0 0 0 -15px;
   content: "- ";
 }
 
@@ -86,30 +146,53 @@ body {
 }
 
 .mainCont {
-  margin: 46.29px 0px 0px 0px;
+  margin: 100px 0px 0px 0px;
 }
 
 .mainCont .pageTitle {
   padding: 10px 0px 10px 0px;
-  margin-bottom: 40px;
+  margin: 0px 0px 40px 20px;
   border-bottom: 2px solid black;
 }
 
-.mainCont .fanficItem, .mainCont .chapterItem {
+.mainCont .introduction {
+  margin: 20px 0px 60px 20px;
+}
+
+.mainCont .fanficItem, .mainCont .chapterItem, .mainCont .newsItem {
   margin: 20px;
   border-bottom: 1px solid grey;
 }
 
-.mainCont .fanficItem .itemTitle, .mainCont .chapterItem .itemTitle {
+.mainCont .fanficItem .itemTitle, .mainCont .chapterItem .itemTitle, .mainCont .newsItem .itemTitle {
   margin: 0px;
 }
 
-.mainCont .fanficItem a, .mainCont .chapterItem a {
+.mainCont .fanficItem a, .mainCont .chapterItem a, .mainCont .newsItem a {
   text-decoration: none;
   color: black;
 }
 
-.mainCont .fanficItem a:hover, .mainCont .chapterItem a:hover {
+.mainCont .fanficItem a:hover, .mainCont .chapterItem a:hover, .mainCont .newsItem a:hover {
   color: #4D9AAD;
+}
+
+@media only screen and (max-width: 992px) {
+  body {
+    font-size: 12px;
+  }
+  .mainCont {
+    margin-left: 70px;
+  }
+  .chapter {
+    margin: 30px;
+  }
+  .lds-ring {
+    left: 70px;
+  }
+  .lds-ring div {
+    width: 58px;
+    height: 58px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

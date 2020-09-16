@@ -6,6 +6,7 @@ export default class News extends React.Component {
     return (
       <div>
         <div className="news">
+          <h1 className="pageTitle">News</h1>
           {news ? news.map((newsItem, key) => {
             return (
               <div className="newsItem" key={key}>

@@ -35,11 +35,14 @@ export default class Fanfic extends React.Component {
       <div>
         <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         <Sidebar handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
-        <div className="mainCont">          
-          <h1 className="pageTitle">Chapters</h1>
+        <div className="mainCont"> 
+          {this.state.loaded ? (            
+            <h1 className="pageTitle">Chapters</h1>
+          ) : (
+            <div/>
+          )}         
           {this.state.loaded ? this.state.chapters.chapters.map((chapter, key) => {
-            return (
-              
+            return (                            
               <div className="chapterItem" key={key}>
                 <Link to={{
                   pathname: `/fanfics/fanfic/${this.props.match.params.fanficId}/chapter/${chapter.id}`,
@@ -50,8 +53,8 @@ export default class Fanfic extends React.Component {
                   <h2> {chapter.title}</h2></Link>
               </div>
             )
-          }) : (
-              <div className="chapterItem" />
+          }) : (              
+              <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
             )}
         </div>
         <Footer />
