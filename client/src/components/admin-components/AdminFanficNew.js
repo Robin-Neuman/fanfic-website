@@ -4,8 +4,7 @@ import React from 'react'
 
 export default class AdminFanficNew extends React.Component {
   render() {
-    const display = this.props.display
-    const postFunction = this.props.postFunction
+    const { display, postFunction} = this.props
     return (
       <div>
         <button onClick={function () { display(false) } }>New Fanfic</button>

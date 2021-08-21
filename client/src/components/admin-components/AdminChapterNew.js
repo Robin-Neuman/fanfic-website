@@ -4,8 +4,7 @@ import React from 'react'
 
 export default class AdminChapterNew extends React.Component {
   render() {
-    const display = this.props.display
-    const newChapter = this.props.newChapter
+    const { display, newChapter } = this.props
     return (
       <div>
         <button onClick={function () { display('chapter', 'new', false) } }>New Chapter</button>

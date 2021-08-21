@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom'
 
 export default class AdminFanfics extends React.Component {
   render() {
-    const fanfics = this.props.fanfics.fanfics
-    const deleteFanfic = this.props.deleteFanfic
+    const { fanfics, deleteFanfic } = this.props
     return (
       <div className="adminFanfics">
         <div className="fanficsCont">                   
-          {fanfics ? fanfics.map((fanfic, key) => {
+          {fanfics.fanfics ? fanfics.fanfics.map((fanfic, key) => {
             return (
               <div className="fanficItem" key={key}>
                 <h1>{fanfic.title}</h1>                

@@ -12,12 +12,12 @@ export default class Sidebar extends React.Component {
   }
 
   toggleNav() {
-    const navOpen = this.state.navOpen
+    const { navOpen } = this.state
     this.setState({ navOpen: !navOpen })
   }
 
   render() {
-    const navOpen = this.state.navOpen
+    const { navOpen } = this.state
     return (
       <div className="sidebar">
           <div className="links">

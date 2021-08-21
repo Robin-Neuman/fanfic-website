@@ -6,14 +6,14 @@ import Sidebar from '../components/Sidebar'
 
 export default class Fanfics extends React.Component {
   render() {
-    const fanfics = this.props.fanfics.fanfics
+    const { fanfics } = this.props
     return (
       <div>
         <Header handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         <Sidebar handleLogout={this.props.handleLogout} loggedIn={this.props.loggedIn} />
         <div className="mainCont">
           <h1 className="pageTitle">Fanfics</h1>
-          {fanfics ? fanfics.map((fanfic, key) => {
+          {fanfics.fanfics ? fanfics.fanfics.map((fanfic, key) => {
             return (
               <div className="fanficItem" key={key}>
                 <h4>Title:</h4>

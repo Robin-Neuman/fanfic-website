@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-const jwt_decode = require('jwt-decode')
 
 function authenticateToken(roles) {
     return async (req, res, next) => {

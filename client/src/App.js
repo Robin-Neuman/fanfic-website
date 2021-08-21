@@ -46,7 +46,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     //localStorage.removeItem('token')
-    Axios.all([Axios.get('/users'), Axios.get('/content/news'), Axios.get('/content/fanfics')]).then(Axios.spread((...responses) => {
+    Axios.all([Axios.get('https://localhost:3000/users'), Axios.get('https://localhost:3000/content/news'), Axios.get('https://localhost:3000/content/fanfics')]).then(Axios.spread((...responses) => {
       const users = responses[0].data
       const news = responses[1].data
       const fanfics = responses[2].data

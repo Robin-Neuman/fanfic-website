@@ -1,16 +1,19 @@
 const Content = require('../models/Content')
 
 async function getFanfics(req, res) {
+  console.log(req)
   let fanfics = await Content.getFanfics(500)
   return res.json(fanfics)
 }
 
 async function getChapters(req, res) {
+  console.log(req)
   let chapters = await Content.getChapters(req.params.id)
   return res.json(chapters)
 }
 
 async function getComments(req, res) {
+  console.log(req)
   let comments = await Content.getComments(req.params.id)
   return res.json(comments)
 }

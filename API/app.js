@@ -5,14 +5,9 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const https = require('https');
+const http = require('http');
 require('dotenv').config();
 const cors = require('cors')
-
-const creds = {
-  key: fs.readFileSync(__dirname + '/public/certificates/selfsigned.key'),
-  cert: fs.readFileSync(__dirname + '/public/certificates/selfsigned.crt')
-}
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -21,7 +16,7 @@ const adminRouter = require('./routes/admin');
 
 const app = express();
 
-const server = https.createServer(creds, app)
+const server = http.createServer(creds, app)
 
 app.use(cors())
 
@@ -34,11 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true,
-}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

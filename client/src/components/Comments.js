@@ -13,14 +13,9 @@ export default class Comments extends React.Component {
     return (
       <div className="commentField">
         {comments ? comments.map((comment, key) => {
-          const deleteComment = this.props.deleteComment
-          const switchMode = this.props.switchMode
-          const submitEdit = this.props.submitEdit
-          const fetchComments = this.props.fetchComments
-          const loggedIn = this.props.loggedIn
-          const chapter = this.props.chapter
-          const token = this.props.token
-          const users = this.props.users.users
+          const { deleteComment, switchMode, submitEdit, 
+                  fetchComments, loggedIn, chapter, token, users } = this.props
+                  
           let decoded = false
           if (token !== undefined && token !== null) {
             decoded = jwt_decode(token)

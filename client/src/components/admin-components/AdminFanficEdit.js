@@ -2,10 +2,7 @@ import React from 'react'
 
 export default class AdminFanficEdit extends React.Component {
   render() {
-    const fanfics = this.props.fanfics
-    const editFanfic = this.props.editFanfic
-    const display = this.props.display
-    const hidden = this.props.hidden
+    const { fanfics, editFanfic, display, hidden } = this.props
     return (
       <div>
         {fanfics.map((fanfic, key) => {

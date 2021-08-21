@@ -36,13 +36,7 @@ export default class AdminFanficEdit extends React.Component {
   ]
 
   render() {
-    const chapter = this.props.chapter
-    const hidden = this.props.hidden
-    const display = this.props.display
-    const editChapter = this.props.editChapter
-    const deleteChapter = this.props.deleteChapter
-    const chapterId = this.props.chapterId
-    const token = this.props.token
+    const { chapter, hidden, display, editChapter, deleteChapter, chapterId, token } = this.props
     return (
       <div>
         <button onClick={function () { display('chapter', 'edit', false) } }>Edit</button>
